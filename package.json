@@ -1,0 +1,12 @@
+{
+  "name": "watermelon-market",
+  "version": "1.0.0",
+  "license": "MIT",
+  "scripts": {
+    "start": "cd backend && ts-node src/server.ts",
+    "build": "cd backend && yarn install && yarn codegen"
+  },
+  "engines": {
+    "yarn": "1.x"
+  }
+}
