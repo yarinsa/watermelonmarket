@@ -13,6 +13,7 @@
     "backend/node_modules"
   ],
   "engines": {
-    "yarn": "1.x"
+    "yarn": "1.x",
+    "node": "12.14.x"
   }
 }
