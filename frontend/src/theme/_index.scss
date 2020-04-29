@@ -1,0 +1,8 @@
+// normalize different browsers style
+@import "~normalize.css";
+
+// Define evergreen-ui vars (colors, shadows, fonts)
+@import "./evergreen-ui/index";
+
+// Define BlueprintJS theme + customization
+@import "./blueprint-js/index";

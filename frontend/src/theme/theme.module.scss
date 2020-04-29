@@ -1,0 +1,25 @@
+@import "./blueprint-js/common/colors";
+
+//background
+$background-color-light: rgb(257, 257, 257);
+$background-color-dark: rgb(257, 257, 257);
+
+//media-queries
+$media-query-phone: 748px;
+$media-query-tablet: 998px;
+
+:export {
+  purple1: $purple1;
+  purple2: $purple2;
+  purple3: $purple3;
+  purple4: $purple4;
+  purple5: $purple5;
+  purple6: $purple6;
+  purple7: $purple7;
+  lightGreen1: $light-green1;
+  lightGreen2: $light-green2;
+  negativeColor: $red3;
+  positiveColor: $green3;
+  mediaQueryPhone: $media-query-phone;
+  mediaQueryTablet: $media-query-tablet;
+}

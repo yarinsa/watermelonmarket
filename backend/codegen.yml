@@ -1,0 +1,22 @@
+overwrite: true
+schema: ./schema/*.graphql
+documents: null
+generates:
+  # Schema for ESLint and VSCode Apollo plugin:
+  ./schema.generated.graphql:
+    plugins:
+      - schema-ast
+    # config:
+    #   includeDirectives: true
+
+  ./src/@generated/types.ts:
+    plugins:
+      - add: "import { MyContext } from '../context';"
+      - add: "import { Interval } from '../enums';"
+      - typescript
+      - typescript-resolvers
+    config:
+      contextType: MyContext
+      enumValues: ../enums
+      useIndexSignature: true
+      defaultMapper: Partial<{T}>

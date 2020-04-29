@@ -1,0 +1,30 @@
+.bp3-input-group.bp3-large {
+  input {
+    padding: 0 13px;
+  }
+}
+
+.bp3-form-group {
+  margin-bottom: 24px;
+
+  .bp3-label {
+    font-size: 14px;
+    line-height: 20px;
+  }
+}
+
+// Font sizes
+.bp3-input-group .bp3-input,
+.bp3-input {
+  font-size: 12px;
+}
+
+.bp3-input-group.bp3-large .bp3-input,
+.bp3-input.bp3-large {
+  font-size: 14px;
+}
+
+// add border to Disabled state
+.bp3-input-group .bp3-input[disabled] {
+  box-shadow: $eg-N4A 0px 0px 0px 1px inset;
+}

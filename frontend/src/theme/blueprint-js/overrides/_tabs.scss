@@ -1,0 +1,65 @@
+.bp3-tab {
+  @include pt-button-base();
+  @include pt-button-minimal();
+  padding: 0 8px;
+  margin: 0 4px !important;
+  height: 50px;
+  font-size: 12px;
+  font-weight: 800;
+  user-select: none;
+}
+
+.bp3-tab[aria-selected="true"] {
+  color: $dark-gray5;
+  &:hover {
+    color: $dark-gray5;
+  }
+}
+
+.bp3-tab[aria-selected="false"] {
+  color: $light-green1;
+  &:hover {
+    color: $dark-gray5;
+  }
+}
+
+.bp3-tab-indicator-wrapper .bp3-tab-indicator {
+  background-color: $light-green1;
+  bottom: 9px;
+  border-radius: 4px;
+  height: 3px;
+}
+
+.minimal-tabs {
+  & .bp3-tab {
+    @include pt-button-base();
+    @include pt-button-minimal();
+    padding: 0 8px;
+    margin: 0 4px !important;
+    height: 50px;
+    font-size: 12px;
+    font-weight: 800;
+    user-select: none;
+  }
+
+  & .bp3-tab[aria-selected="true"] {
+    color: $purple1;
+    &:hover {
+      color: $purple1;
+    }
+  }
+
+  & .bp3-tab[aria-selected="false"] {
+    color: $dark-gray5;
+    &:hover {
+      color: $purple1;
+    }
+  }
+
+  & .bp3-tab-indicator-wrapper .bp3-tab-indicator {
+    background-color: rgba(170, 131, 228, 0.4);
+    bottom: 13px;
+    border-radius: 8px;
+    height: 23px;
+  }
+}

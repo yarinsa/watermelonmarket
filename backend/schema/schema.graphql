@@ -1,0 +1,115 @@
+type Query {
+  stock(symbol: ID!): Stock!
+  searchStock(query: String!): [Stock!]!
+}
+
+# Date represents a Date variable #
+# Input as timestamp (Int) output as formatted date (fixed to GMT time) #
+# example: 1587648040 => Thursday, April 23, 2020 1:20:40 PM #
+scalar MyDate
+
+enum InstrumentType {
+  EQUITY
+  ETF
+  FOREX
+}
+
+type Stock {
+  symbol: ID!
+  name: String!
+  type: InstrumentType!
+  quote: Quote!
+  priceHistory: PriceHistory!
+  companyProfile: CompanyProfile!
+  market: Market!
+  chartData(timeRange: TimeRange!, interval: Interval!): [PricePoint!]!
+}
+
+type Quote {
+  price: Float!
+  open: Float!
+  close: Float!
+  low: Float!
+  high: Float!
+  change: Float!
+  changePercent: Float!
+  volume: Int!
+  averageVolume: Int!
+  marketCap: Int!
+  # peRatio is nullable, since it's irrelevant in case of ETF or etc. #
+  peRatio: Float
+  dividend: Float!
+  dividendPercent: Float!
+}
+
+type PriceHistory {
+  fiftyTwoWeekLow: Float!
+  fiftyTwoWeekHigh: Float!
+  fiftyTwoWeekChange: Float!
+  fiftyTwoWeekChangePercent: Float!
+}
+
+type CompanyProfile {
+  address: String!
+  phoneNumber: String!
+  website: String!
+  sector: String!
+  industry: String!
+  sector: String!
+  fullTimeEmployees: Int!
+  description: String!
+}
+
+type Market {
+  exchangeName: ID!
+  region: String!
+  language: String!
+  timezone: String!
+  currency: String!
+  marketState: MarketState!
+  gmtOffset: Int!
+}
+
+enum MarketState {
+  PRE
+  REGULAR
+  POST
+  CLOSED
+}
+
+enum TimeRange {
+  DAY
+  FIVE_DAYS
+  MONTH
+  THREE_MONTH
+  SIX_MONTH
+  YEAR
+  TWO_YEARS
+  FIVE_YEARS
+  TEN_YEARS
+  YTD
+  MAX
+}
+
+enum Interval {
+  MINUTE
+  TWO_MINUTES
+  FIVE_MINUTES
+  FIFTEEN_MINUTES
+  THIRTY_MINUTES
+  HOUR
+  FOUR_HOURS
+  DAY
+  WEEK
+  MONTH
+  YEAR
+}
+
+type PricePoint {
+  time: MyDate!
+  price: Float!
+}
+
+# schema {
+#   query: Query
+# }

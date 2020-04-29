@@ -1,0 +1,23 @@
+.#{$ns}-popover {
+  // Bigger border radius
+  border-radius: 5px;
+  .#{$ns}-popover-content {
+    border-radius: 5px;
+  }
+
+  // More gentale scale-in animation
+  @include react-transition(
+    '#{$ns}-popover',
+    (
+      transform: scale(0.9) scale(1),
+    ),
+    $duration: $pt-transition-duration * 3,
+    $easing: $pt-transition-ease-bounce,
+    $after: '> &'
+  );
+}
+
+// remove scale-out animation, just fade-out stays
+.bp3-popover-exit-active > .bp3-popover {
+  transform: scale(1);
+}

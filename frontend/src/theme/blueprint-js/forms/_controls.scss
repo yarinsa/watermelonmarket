@@ -1,0 +1,15 @@
+// $control-background-color: $button-background-color !default;
+// $control-background-color-hover: $button-background-color-hover !default;
+// $control-background-color-active: $button-background-color-active !default;
+// $dark-control-background-color: $dark-button-background-color !default;
+// $dark-control-background-color-hover: $dark-button-background-color-hover !default;
+// $dark-control-background-color-active: $dark-button-background-color-active !default;
+
+// $control-checked-background-color: nth(map-get($button-intents, "primary"), 1) !default;
+// $control-checked-background-color-hover: nth(map-get($button-intents, "primary"), 2) !default;
+// $control-checked-background-color-active: nth(map-get($button-intents, "primary"), 3) !default;
+
+// make checkbox 16x16px instead of 12x12px
+$control-indicator-size: 16px;
+$control-indicator-size-large: 20px;
+// $control-indicator-spacing: $pt-grid-size !default;

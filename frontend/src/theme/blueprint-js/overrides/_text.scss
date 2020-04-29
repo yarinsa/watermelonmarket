@@ -1,0 +1,21 @@
+// these value overrides are from:
+// https://evergreen.segment.com/components/typography/
+
+.#{$ns}-ui-text {
+  font-family: $pt-font-family;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: -0.05px;
+}
+
+.#{$ns}-text-large {
+  font-size: $pt-font-size-large;
+  line-height: 20px;
+  letter-spacing: -0.05px;
+}
+
+.#{$ns}-text-small {
+  font-size: $pt-font-size-small;
+  line-height: 16px;
+  letter-spacing: 0;
+}

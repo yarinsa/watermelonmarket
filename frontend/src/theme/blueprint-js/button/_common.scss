@@ -1,0 +1,114 @@
+// $button-border-width: 1px !default;
+// $button-padding: ($pt-grid-size / 2) $pt-grid-size !default;
+$button-padding: 0 2 * $pt-grid-size;
+$button-padding-small: 0 12px;
+$button-padding-large: 4px 20px;
+// $button-icon-spacing: ($pt-button-height - $pt-icon-size-standard) / 2 !default;
+$button-icon-spacing: $pt-grid-size;
+// $button-icon-spacing-large: ($pt-button-height-large - $pt-icon-size-large) / 2 !default;
+
+// /*
+// CSS `border` property issues:
+// - An element can only have one border.
+// - Borders can't stack with shadows.
+// - Borders modify the size of the element they're applied to.
+// - Border positioning requires the extra `box-sizing` property.
+// `box-shadow` doesn't have these issues, we're using it instead of `border`.
+// */
+// $button-box-shadow:
+//   inset 0 0 0 $button-border-width rgba($black, 0.2),
+//   inset 0 (-$button-border-width) 0 rgba($black, 0.1) !default;
+$button-box-shadow: inset 0 0 0 1px rgba(67, 90, 111, 0.14),
+  inset 0 -1px 1px 0 rgba(67, 90, 111, 0.06);
+// $button-box-shadow-active:
+//   inset 0 0 0 $button-border-width rgba($black, 0.2),
+//   inset 0 1px 2px rgba($black, 0.2) !default;
+// $button-intent-box-shadow:
+//   inset 0 0 0 $button-border-width rgba($black, 0.4),
+//   inset 0 (-$button-border-width) 0 rgba($black, 0.2) !default;
+$button-intent-box-shadow: inset 0 0 0 1px rgba(67, 90, 111, 0.3),
+  inset 0 -1px 1px 0 rgba(67, 90, 111, 0.06);
+// $button-intent-box-shadow-active:
+//   inset 0 0 0 $button-border-width rgba($black, 0.4),
+//   inset 0 1px 2px rgba($black, 0.2) !default;
+
+// /*
+// Overlay shadows are used for default buttons
+// floating on top of other elements. This way, the
+// shadows blend with the colors beneath it.
+// Switches and slider handles both use these variables.
+// */
+// $button-box-shadow-overlay:
+//   0 0 0 $button-border-width rgba($black, 0.2),
+//   0 1px 1px rgba($black, 0.2) !default;
+// $button-box-shadow-overlay-active:
+//   0 0 0 $button-border-width rgba($black, 0.2),
+//   inset 0 1px 1px rgba($black, 0.1) !default;
+
+// $dark-button-box-shadow:
+//   0 0 0 $button-border-width rgba($black, 0.4) !default;
+// $dark-button-box-shadow-active:
+//   0 0 0 $button-border-width rgba($black, 0.6),
+//   inset 0 1px 2px rgba($black, 0.2) !default;
+// $dark-button-intent-box-shadow:
+//   0 0 0 $button-border-width rgba($black, 0.4) !default;
+// $dark-button-intent-box-shadow-active:
+//   0 0 0 $button-border-width rgba($black, 0.4),
+//   inset 0 1px 2px rgba($black, 0.2) !default;
+
+// $button-gradient: linear-gradient(to bottom, rgba($white, 0.8), rgba($white, 0)) !default;
+$button-gradient: linear-gradient(to bottom, #ffffff, #f4f5f7);
+// $button-intent-gradient: linear-gradient(to bottom, rgba($white, 0.1), rgba($white, 0)) !default;
+$button-intent-gradient: linear-gradient(
+  to bottom,
+  rgba($white, 0.3),
+  rgba($white, 0)
+) !default;
+// $dark-button-gradient: linear-gradient(to bottom, rgba($white, 0.05), rgba($white, 0)) !default;
+
+$button-color-disabled: $eg-N7A !default;
+// $button-background-color: $light-gray5 !default;
+// $button-background-color-hover: #000000 !default;
+// $button-background-color-active: $light-gray2 !default;
+$button-background-color-disabled: $eg-N2A;
+// $button-background-color-active-disabled: rgba($light-gray1, 0.7) !default;
+// $button-intent-color-disabled: rgba($white, 0.6);
+// $dark-button-color-disabled: $pt-dark-text-color-disabled !default;
+// $dark-button-background-color: $dark-gray5 !default;
+// $dark-button-background-color-hover: $dark-gray4 !default;
+// $dark-button-background-color-active: $dark-gray2 !default;
+// $dark-button-background-color-disabled: rgba($dark-gray5, 0.5) !default;
+// $dark-button-background-color-active-disabled: rgba($dark-gray5, 0.7) !default;
+// $dark-button-intent-color-disabled: rgba($white, 0.3);
+
+// $minimal-button-divider-width: 1px !default;
+// $minimal-button-background-color: none !default;
+$minimal-button-background-color-hover: $eg-N2A;
+$minimal-button-background-color-active: $eg-B3A;
+// $dark-minimal-button-background-color: none !default;
+// $dark-minimal-button-background-color-hover: rgba($gray3, 0.15) !default;
+// $dark-minimal-button-background-color-active: rgba($gray3, 0.3) !default;
+
+// // "intent": (default, hover, active) - colors
+$button-intents: (
+  'primary': (
+    $pt-intent-primary,
+    darken($pt-intent-primary, 3%),
+    #7039ce,
+  ),
+  'success': (
+    $pt-intent-success,
+    $green2,
+    $green1,
+  ),
+  'warning': (
+    $pt-intent-warning,
+    $orange2,
+    $orange1,
+  ),
+  'danger': (
+    $pt-intent-danger,
+    $red2,
+    $red1,
+  ),
+);

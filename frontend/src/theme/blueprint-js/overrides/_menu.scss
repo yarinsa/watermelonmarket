@@ -1,0 +1,31 @@
+.bp3-menu {
+  padding: 8px 0;
+
+  .bp3-menu-item {
+    border-radius: 0;
+    padding-left: 16px;
+    padding-right: 16px;
+
+    // align icon using flex, instead of margins
+    align-items: center;
+
+    // now that we align with flex, remove margins
+    .bp3-icon {
+      margin-top: 0;
+    }
+
+    // This is used to space the text from the bp3-icon or custom-icon
+    > * {
+      margin-right: 12px;
+    }
+  }
+
+  .bp3-menu-divider {
+    margin: 8px 0;
+  }
+}
+
+.bp3-menu-item:hover,
+.bp3-submenu .bp3-popover-target.bp3-popover-open > .bp3-menu-item {
+  background-color: #3dcc911a;
+}

@@ -1,0 +1,16 @@
+.bp3-select-popover {
+  .bp3-popover-content {
+    // to make the corners look better with borderRadius: 5px
+    overflow: hidden;
+
+    // restrict max width, otherwise it can go crazy with long content
+    // min-width: 120px;
+    max-width: 500px;
+  }
+
+  .bp3-input-group {
+    margin: 0 8px;
+    margin-top: 8px;
+    margin-bottom: 4px;
+  }
+}

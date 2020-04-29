@@ -1,0 +1,127 @@
+// Intent
+$eg-intent-none: #8545fd; // #8e54ff; // $eg-blue-base;
+$eg-intent-success: $eg-green-base;
+$eg-intent-danger: $eg-red-base;
+$eg-intent-warning: $eg-orange-base;
+
+// Background
+$eg-background-tint1: $eg-N1;
+$eg-background-tint2: $eg-N2;
+$eg-background-overlay: $eg-N7A;
+$eg-background-yellowTint: $eg-yellow-lightest;
+$eg-background-greenTint: $eg-green-lightest;
+$eg-background-orangeTint: $eg-orange-lightest;
+$eg-background-redTint: $eg-red-lightest;
+$eg-background-blueTint: $eg-blue-lightest;
+
+$eg-background-foreground: #ffffff;
+$eg-dark-background-foreground: #394b59;
+
+$eg-control-focus-color: rgba($eg-intent-none, 0.2);
+
+// Classes for Pane
+.eg-background-foreground {
+  background-color: $eg-background-foreground;
+  .bp3-dark & {
+    background-color: $eg-dark-background-foreground;
+  }
+}
+body,
+.eg-background-background {
+  background-color: #f7f7f7; // #f7f8fa;
+}
+body.bp3-dark,
+.bp3-dark .eg-background-background {
+  background-color: #30404d;
+}
+.eg-background-tint1 {
+  background-color: $eg-background-tint1;
+  .bp3-dark & {
+    background-color: #455969;
+  }
+}
+.eg-background-tint2 {
+  background-color: $eg-background-tint2;
+  .bp3-dark & {
+    background-color: #293742;
+  }
+}
+.eg-background-overlay {
+  background-color: $eg-background-overlay;
+}
+.eg-background-yellowTint {
+  background-color: $eg-background-yellowTint;
+}
+.eg-background-greenTint {
+  background-color: $eg-background-greenTint;
+}
+.eg-background-orangeTint {
+  background-color: $eg-background-orangeTint;
+}
+.eg-background-redTint {
+  background-color: $eg-background-redTint;
+}
+.eg-background-blueTint {
+  background-color: $eg-background-blueTint;
+}
+
+// interactive (clickable surface)
+// used for table rows for example
+
+.eg-interactive {
+  cursor: pointer;
+
+  &:hover {
+    background-color: $eg-N1A;
+    .bp3-dark & {
+      background-color: $eg-N8A;
+    }
+  }
+  &:active {
+    background-color: $eg-B2A;
+    .bp3-dark & {
+      background-color: $eg-B4A;
+    }
+  }
+}
+
+// Border
+$eg-border-default: $eg-N4;
+$eg-border-muted: $eg-N3;
+
+.eg-border-default {
+  border-color: $eg-border-default;
+  .bp3-dark & {
+    border-color: #4f5c68;
+  }
+}
+.eg-border-muted {
+  border-color: $eg-border-muted;
+  .bp3-dark & {
+    border-color: #435564;
+  }
+}
+
+// Text
+$eg-text-default: $eg-N9;
+$eg-text-muted: $eg-N8;
+$eg-text-dark: $eg-N10;
+$eg-text-selected: $eg-blue-base;
+
+// Text with intent
+$eg-text-intent-success: $eg-green-dark;
+$eg-text-intent-info: $eg-blue-dark;
+$eg-text-intent-danger: $eg-red-dark;
+$eg-text-intent-warning: $eg-orange-dark;
+
+// Icon
+$eg-icon-default: $eg-N8;
+$eg-icon-muted: $eg-N7;
+$eg-icon-disabled: $eg-N5A;
+$eg-icon-selected: $eg-blue-base;
+
+// Icon with intent
+$eg-icon-intent-success: $eg-green-base;
+$eg-icon-intent-info: $eg-blue-base;
+$eg-icon-intent-danger: $eg-red-base;
+$eg-icon-intent-warning: $eg-orange-base;

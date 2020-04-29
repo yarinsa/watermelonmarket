@@ -1,0 +1,126 @@
+/**
+* Scales
+*/
+
+// Neutral
+$eg-N1: #f9f9fb;
+$eg-N2: #f5f6f7;
+$eg-N3: #edf0f2;
+$eg-N4: #e4e7eb;
+$eg-N5: #c7ced4;
+$eg-N6: #a6b1bb;
+$eg-N7: #7b8b9a;
+$eg-N8: #66788a;
+$eg-N9: #425a70;
+$eg-N10: #234361;
+
+$eg-N1A: rgba(67, 90, 111, 0.04);
+$eg-N2A: rgba(67, 90, 111, 0.06);
+$eg-N3A: rgba(67, 90, 111, 0.09);
+$eg-N4A: rgba(67, 90, 111, 0.14);
+$eg-N5A: rgba(67, 90, 111, 0.3);
+$eg-N6A: rgba(67, 90, 111, 0.47);
+$eg-N7A: rgba(67, 90, 111, 0.7);
+$eg-N8A: rgba(67, 90, 111, 0.81);
+
+// Blue
+$eg-B1: #f7f9fd;
+$eg-B2: #f1f7fc;
+$eg-B3: #e9f2fa;
+$eg-B4: #ddebf7;
+$eg-B5: #b7d4ef;
+$eg-B6: #8fbce6;
+$eg-B7: #579ad9;
+$eg-B8: #3d8bd4;
+$eg-B9: #1070ca;
+$eg-B10: #084b8a;
+
+$eg-B1A: rgba(16, 112, 202, 0.04);
+$eg-B2A: rgba(16, 112, 202, 0.06);
+$eg-B3A: rgba(16, 112, 202, 0.09);
+$eg-B4A: rgba(16, 112, 202, 0.14);
+$eg-B5A: rgba(16, 112, 202, 0.3);
+$eg-B6A: rgba(16, 112, 202, 0.47);
+$eg-B7A: rgba(16, 112, 202, 0.7);
+$eg-B8A: rgba(16, 112, 202, 0.81);
+
+/**
+* Palette.
+*/
+$eg-neutral-lightest: $eg-N1;
+$eg-neutral-light: $eg-N4;
+$eg-neutral-base: $eg-N9;
+$eg-neutral-dark: $eg-N10;
+
+$eg-blue-lightest: $eg-B1;
+$eg-blue-light: $eg-B4;
+$eg-blue-base: $eg-B9;
+$eg-blue-dark: $eg-B10;
+
+$eg-red-lightest: #fef6f6;
+$eg-red-light: #fae2e2;
+$eg-red-base: #ec4c47;
+$eg-red-dark: #bf0e08;
+
+$eg-orange-lightest: #fdf8f3;
+$eg-orange-light: #fae3cd;
+$eg-orange-base: #d9822b;
+$eg-orange-dark: #95591e;
+
+$eg-yellow-lightest: #fef8e7;
+$eg-yellow-light: #fbe6a2;
+$eg-yellow-base: #f7d154;
+$eg-yellow-dark: #7e6514;
+
+$eg-green-lightest: #f1faf5;
+$eg-green-light: #d4eee2;
+$eg-green-base: #47b881;
+$eg-green-dark: #00783e;
+
+$eg-teal-lightest: #f1fbfc;
+$eg-teal-light: #d2eef3;
+$eg-teal-base: #14b5d0;
+$eg-teal-dark: #007489;
+
+$eg-purple-lightest: #f8f7fc;
+$eg-purple-light: #eae7f8;
+$eg-purple-base: #735dd0;
+$eg-purple-dark: #37248f;
+
+/**
+* Shadow.
+*/
+$eg-color-border-shadow: $eg-N6A;
+$eg-color-blurry-shadow: $eg-N5A;
+
+$eg-elevation-0: 0 0 1px $eg-color-border-shadow;
+$eg-elevation-1: 0 0 1px $eg-color-border-shadow,
+  0 2px 4px -2px $eg-color-blurry-shadow;
+$eg-elevation-2: 0 0 1px $eg-color-border-shadow,
+  0 5px 8px -4px $eg-color-blurry-shadow;
+$eg-elevation-3: 0 0 1px $eg-color-border-shadow,
+  0 8px 10px -4px $eg-color-blurry-shadow;
+$eg-elevation-4: 0 0 1px $eg-color-border-shadow,
+  0 16px 24px -8px $eg-color-blurry-shadow;
+$eg-elevation-5: 0 0 1px $eg-color-border-shadow,
+  0 2px 4px -2px $eg-color-blurry-shadow;
+
+// Shadow classes
+.eg-elevation-0 {
+  box-shadow: $eg-elevation-0;
+}
+.eg-elevation-1 {
+  box-shadow: $eg-elevation-1;
+}
+.eg-elevation-2 {
+  box-shadow: $eg-elevation-2;
+}
+.eg-elevation-3 {
+  box-shadow: $eg-elevation-3;
+}
+.eg-elevation-4 {
+  box-shadow: $eg-elevation-4;
+}
+.eg-elevation-5 {
+  box-shadow: $eg-elevation-5;
+}

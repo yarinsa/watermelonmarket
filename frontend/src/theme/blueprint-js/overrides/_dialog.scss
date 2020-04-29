@@ -1,0 +1,44 @@
+.bp3-dialog {
+  // disabling default styling
+  padding-bottom: 0;
+
+  background-color: $eg-background-foreground;
+  .bp3-dark & {
+    background-color: $eg-dark-background-foreground;
+  }
+
+  // Add some margin:
+  margin: 12vmin 16px;
+  &-header h4 {
+    padding: 10px 10px;
+    color: #d9822b !important;
+    font-weight: 600;
+    font-size: 24px;
+  }
+}
+
+.bp3-dialog-container {
+  // Change the dialog animation
+  $dialog-transition-props: (
+    opacity: (
+      0,
+      1,
+    ),
+    transform: (
+      scale(0.8),
+      scale(1),
+    ),
+  );
+
+  @include react-transition(
+    "#{$ns}-overlay",
+    $dialog-transition-props,
+    $duration: $pt-transition-duration * 3,
+    $easing: $pt-transition-ease-bounce,
+    $before: "&",
+    $after: "> .#{$ns}-dialog"
+  );
+
+  // Make the dialog at the top of the screen instead of center:
+  align-items: flex-start;
+}

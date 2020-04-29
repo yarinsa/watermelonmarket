@@ -1,0 +1,22 @@
+// Define common BlueprintJS vars
+@import "./common/colors";
+@import "./common/color-aliases";
+@import "./common/variables";
+
+// Define more fonts
+@import "./typography";
+
+// Define specific component vars
+@import "./button/common";
+@import "./forms/common";
+@import "./forms/controls";
+@import "./tooltip/common";
+@import "./overlay";
+
+// Import entire blueprint scss library
+// it will use all the variables we defined earlier
+@import "~@blueprintjs/core/src/blueprint.scss";
+// @import "~@blueprintjs/icons/lib/css/blueprint-icons.css";
+
+// Hard overrides (only when theme system failed us and we had to go rough)
+@import "./overrides/index";

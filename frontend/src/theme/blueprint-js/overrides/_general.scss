@@ -1,0 +1,22 @@
+// This file doesn't work like theme customization variables,
+// but actually override stuff by BlueprintJS,
+// use only if theme variables doesn't work for you
+
+// Hack: for some reason $pt-icon-size-standard doesn't work
+.#{$ns}-icon {
+  > svg {
+    width: 12px;
+    height: 12px;
+  }
+}
+
+.bp3-input:focus,
+.bp3-input.bp3-active {
+  box-shadow: inset 0 0 2px rgba(67, 90, 111, 0.14),
+    inset 0 0 0 1px $pt-intent-primary, 0 0 0 3px $eg-control-focus-color;
+}
+
+// Annoying outline focus I hate you!!!
+:focus {
+  outline: none;
+}
