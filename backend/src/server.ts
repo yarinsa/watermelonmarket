@@ -13,8 +13,8 @@ app.use(bodyParser.json());
 
 apolloServer.applyMiddleware({ app });
 
-app.use(express.static(__dirname));
-app.use(express.static(path.resolve(__dirname, "build")));
+// app.use(express.static(__dirname));
+app.use(express.static(path.resolve(__dirname, "../../frontend/build")));
 // app.get("/*", (req, res) => {
 //   console.log("request has been made!");
 //   res.sendFile(path.join(__dirname, "build", "index.html"));

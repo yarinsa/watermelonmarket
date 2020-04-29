@@ -1,2 +1,5 @@
-﻿deprecated
-backend/node_modules
+deprecated
+node_modules
+@generated
+.DS_Store
+build

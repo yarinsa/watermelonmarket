@@ -1,6 +1,6 @@
 overwrite: true
 schema:
-  - "/graphql"
+  - "../backend/schema/*.graphql"
 generates:
   # TS Types for out source code:
   ./src/@generated/types.ts:

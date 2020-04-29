@@ -9,10 +9,7 @@ export type Scalars = {
   Boolean: boolean;
   Int: number;
   Float: number;
-  /** Date custom scalar type */
-  Date: any;
-  /** The `Upload` scalar type represents a file upload. */
-  Upload: any;
+  MyDate: any;
 };
 
 export type Query = {
@@ -140,15 +137,9 @@ export enum Interval {
 
 export type PricePoint = {
    __typename?: 'PricePoint';
-  time: Scalars['Date'];
+  time: Scalars['MyDate'];
   price: Scalars['Float'];
 };
-
-export enum CacheControlScope {
-  Public = 'PUBLIC',
-  Private = 'PRIVATE'
-}
-
 
 export type GetChartQueryVariables = {
   symbol: Scalars['ID'];
