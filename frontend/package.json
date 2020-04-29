@@ -90,9 +90,8 @@
   },
   "proxy": "http://localhost:3030",
   "scripts": {
-    "prestart": "yarn codegen",
-    "start": " node scripts/start.js",
-    "build": "node scripts/build.js",
+    "start": "node scripts/start.js",
+    "build": "yarn codegen && node scripts/build.js",
     "test": "node scripts/test.js",
     "codegen": "graphql-codegen",
     "codegen:watch": "graphql-codegen --watch"
