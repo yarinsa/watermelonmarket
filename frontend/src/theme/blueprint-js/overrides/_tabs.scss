@@ -30,7 +30,7 @@
   height: 3px;
 }
 
-.minimal-tabs {
+.full-tabs {
   & .bp3-tab {
     @include pt-button-base();
     @include pt-button-minimal();
@@ -43,21 +43,21 @@
   }
 
   & .bp3-tab[aria-selected="true"] {
-    color: $purple1;
+    color: $dark-gray5;
     &:hover {
-      color: $purple1;
+      color: $dark-gray5;
     }
   }
 
   & .bp3-tab[aria-selected="false"] {
     color: $dark-gray5;
     &:hover {
-      color: $purple1;
+      color: $light-green1;
     }
   }
 
   & .bp3-tab-indicator-wrapper .bp3-tab-indicator {
-    background-color: rgba(170, 131, 228, 0.4);
+    background-color: rgba(15, 153, 96, 0.3);
     bottom: 13px;
     border-radius: 8px;
     height: 23px;

@@ -94,7 +94,7 @@ const Stock: StockResolvers = {
     return {
       industry: data.industry,
       sector: data.sector,
-      address: data.address1,
+      address: `${data.address1}, ${data.city}, ${data.state}, ${data.country}`,
       phoneNumber: data.phone,
       fullTimeEmployees: data.fullTimeEmployees,
       website: data.website,
@@ -110,7 +110,6 @@ const Stock: StockResolvers = {
     const { symbol } = parent;
     const validSymbol = symbol ? symbol : "";
     if (validSymbol === "") return;
-    console.log("CHART ISCMDODMDOD ----------");
     const result = await stocksApi.getChartData(
       validSymbol,
       time.from,
@@ -119,7 +118,7 @@ const Stock: StockResolvers = {
     );
     return result.map((chartPoint: any) => ({
       time: chartPoint.date,
-      price: chartPoint.close - 500,
+      price: chartPoint.close,
     }));
   },
 };
@@ -128,14 +127,14 @@ const MyDate: GraphQLScalarType = new GraphQLScalarType({
   name: "Date",
   description: "Date custom scalar type",
   parseValue(value) {
-    return new Date(value); // value from the client
+    return new Date(value * 1000); // value from the client
   },
   serialize(value) {
-    return new Date(value); // value sent to the client
+    return new Date(value * 1000); // value sent to the client
   },
   parseLiteral(ast) {
     if (ast.kind === Kind.INT) {
-      return new Date(+ast.value); // ast value is always in string format
+      return new Date(+ast.value * 1000); // ast value is always in string format
     }
     return null;
   },

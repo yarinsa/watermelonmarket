@@ -5,6 +5,7 @@ import {
   Tooltip,
   ComposedChart,
   YAxis,
+  CartesianGrid,
 } from "recharts";
 import styled from "styled-components";
 import { formatDataToChart } from "../utils.service";
@@ -12,6 +13,7 @@ import gql from "graphql-tag";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { Stock, Interval, TimeRange } from "../@generated/types";
 import { Tabs, Tab, Popover, Button, Menu, MenuItem } from "@blueprintjs/core";
+import moment from "moment";
 
 interface ChartProps extends Partial<Stock> {}
 export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
@@ -42,14 +44,6 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
   const dropdownMenu = (
     <Menu>
       <MenuItem
-        onClick={() => handleIntervalSelect(Interval.Minute)}
-        text="One Minute"
-      />
-      <MenuItem
-        onClick={() => handleIntervalSelect(Interval.TwoMinutes)}
-        text="Two Minutes"
-      />
-      <MenuItem
         onClick={() => handleIntervalSelect(Interval.FiveMinutes)}
         text="Five Minutes"
       />
@@ -66,10 +60,6 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
         text="One Hour"
       />
       <MenuItem
-        onClick={() => handleIntervalSelect(Interval.FourHours)}
-        text="Four Hours"
-      />
-      <MenuItem
         onClick={() => handleIntervalSelect(Interval.Day)}
         text="One Day"
       />
@@ -82,8 +72,8 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
         text="One Month"
       />
       <MenuItem
-        onClick={() => handleIntervalSelect(Interval.Year)}
-        text="One Year"
+        onClick={() => handleIntervalSelect(Interval.ThreeMonth)}
+        text="Three Month"
       />
     </Menu>
   );
@@ -103,6 +93,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
                 ? formatDataToChart(data.stock.chartData)
                 : formatDataToChart(chartData)
             }
+            baseValue={30}
           >
             <Line
               type="monotone"
@@ -110,7 +101,31 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
               stroke="#21ce99"
               strokeWidth={3}
             />
-            {/* <Tooltip /> */}
+            <Line
+              type="monotone"
+              dataKey="minimizer"
+              stroke="transparent"
+              strokeWidth={3}
+            />
+            <Line
+              type="monotone"
+              dataKey="maximizer"
+              stroke="transparent"
+              strokeWidth={3}
+            />
+            <Line type="monotone" dataKey="500" stroke="pink" strokeWidth={3} />
+            <Tooltip
+              formatter={(value, name, props) => {
+                const { payload } = props;
+                return [
+                  payload.price.toFixed(3),
+                  moment(payload.time).format("MM-DD-YYYY"),
+                ];
+              }}
+              labelFormatter={(props) => {
+                return "Date / Price";
+              }}
+            />
           </StyledChart>
         </ResponsiveContainer>
       </ChartContainer>
@@ -141,19 +156,9 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
           title="1 year"
         />
         <Tab
-          onMouseDown={() => handleTimeRangeSelect(TimeRange.TwoYears)}
-          id={TimeRange.TwoYears}
-          title="2 years"
-        />
-        <Tab
           onMouseDown={() => handleTimeRangeSelect(TimeRange.FiveYears)}
           id={TimeRange.FiveYears}
           title="5 years"
-        />
-        <Tab
-          onMouseDown={() => handleTimeRangeSelect(TimeRange.TenYears)}
-          id={TimeRange.TenYears}
-          title="10 years"
         />
         <Tab
           onMouseDown={() => handleTimeRangeSelect(TimeRange.Ytd)}
@@ -161,7 +166,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
           title="YTD"
         />
         <Tab
-          onMouseDown={() => handleTimeRangeSelect(TimeRange.Day)}
+          onMouseDown={() => handleTimeRangeSelect(TimeRange.Max)}
           id={TimeRange.Max}
           title="MAX"
         />

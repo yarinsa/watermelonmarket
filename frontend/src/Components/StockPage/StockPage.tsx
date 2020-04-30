@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/macro";
-import { H1, H3, Spinner } from "@blueprintjs/core";
+import { H1, H3, Spinner, Drawer } from "@blueprintjs/core";
 import { KeyStatisticsTable } from "./KeyStatisticsTable";
 import theme from "../../theme/theme.module.scss";
-import { useRouteMatch } from "react-router-dom";
+import { useRouteMatch, useHistory } from "react-router-dom";
 import { MatchParams } from "../../App";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
@@ -18,19 +18,34 @@ import {
 } from "recharts";
 import { formatDataToChart } from "../../utils.service";
 import { Chart } from "../Chart";
+import { MoreInfo } from "./MoreInfoPage";
 
 interface StockPageProps {}
 
 export const StockPage: React.FC<StockPageProps> = ({}) => {
   let match = useRouteMatch<MatchParams>("/symbol/:symbol");
-
+  const [isDrawerOpen, setDrawer] = useState(false);
   const { data, loading, error } = useQuery(GET_STOCK_INFO, {
     variables: {
       symbol: match?.params.symbol,
     },
   });
 
-  // console.log(error)
+  let history = useHistory();
+  const symbol = match?.params.symbol;
+  const handleDrawer = (isOpen: boolean) => {
+    if (isOpen){
+      setDrawer(false);
+      history.push(`/symbol/${symbol}`)
+  
+    } else{
+
+      setDrawer(true);
+      history.push(`/symbol/${symbol}/company-profile`)
+    }
+  }
+
+
 
   return (
     <Root>
@@ -68,7 +83,10 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
               <CompanyDescription>
                 {data.stock.companyProfile.description}
               </CompanyDescription>
-              <ShowMore>Show more</ShowMore>
+              <ShowMore onClick={()=>handleDrawer(false)}>Show more</ShowMore>
+              <Drawer isOpen={isDrawerOpen} onClose={() =>handleDrawer(true)}>
+                <MoreInfo {...data.stock}/>
+              </Drawer>
             </InfoItem>
           </InfoContainer>
         </div>
@@ -183,6 +201,13 @@ const GET_STOCK_INFO = gql`
       }
       companyProfile {
         description
+        address
+        phoneNumber
+        website
+        sector
+        industry
+        sector
+        fullTimeEmployees
       }
       priceHistory {
         fiftyTwoWeekLow

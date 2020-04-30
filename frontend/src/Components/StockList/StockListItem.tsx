@@ -62,6 +62,18 @@ export const StockListItem: React.FC<StockListItemProps> = ({
               stroke="#21ce99"
               strokeWidth={2}
             />
+            <Line
+              type="monotone"
+              dataKey="minimizer"
+              stroke="transparent"
+              strokeWidth={3}
+            />
+            <Line
+              type="monotone"
+              dataKey="maximizer"
+              stroke="transparent"
+              strokeWidth={3}
+            />
           </ComposedChart>
         )}
       </ChartContainer>
@@ -111,7 +123,7 @@ const Subtitle = styled.span`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-size: 12px;
+  font-size: 10px;
   width: 90px;
 `;
 
@@ -119,6 +131,9 @@ const ChartContainer = styled.div`
   flex: 1;
   .recharts-layer.recharts-line-dots {
     display: none;
+  }
+  .recharts-wrapper{
+    cursor: pointer !important;
   }
 `;
 

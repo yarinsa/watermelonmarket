@@ -7,9 +7,9 @@ export enum Interval {
   HOUR = "1h",
   FOUR_HOURS = "5h",
   DAY = "1d",
-  WEEK = "1w",
-  MONTH = "1m",
-  YEAR = "1y",
+  WEEK = "1wk",
+  MONTH = "1mo",
+  THREE_MONTH = "3mo",
 }
 
 export enum InstrumentType {
@@ -22,6 +22,7 @@ export enum MarketState {
   PRE,
   REG,
   POST,
+  POSTPOST,
   CLOSED,
 }
 

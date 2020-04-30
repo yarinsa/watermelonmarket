@@ -15,7 +15,7 @@ export const timeRangeToTimeStamp = (timeRange: TimeRange): TimeRangeStamps => {
   if (timeRange === "MAX") {
     from = 0;
   } else if (timeRange === "YTD") {
-    from = new Date(new Date().getFullYear(), 0, 1).getTime();
+    from = new Date(new Date().getFullYear(), 0, 1).getTime() / 1000;
   }
   return {
     to: 9999999999, //To current time

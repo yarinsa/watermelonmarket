@@ -17,7 +17,7 @@ export const Sidebar: React.FC<SidebarProps> = ({}) => {
 };
 
 const Root = styled.aside`
-  width: 170px;
+  min-width: 170px;
   background-color: #f4f7f9;
   box-shadow: 0px 0 3px #999;
   z-index: 1;

@@ -74,6 +74,7 @@ enum MarketState {
   PRE
   REGULAR
   POST
+  POSTPOST
   CLOSED
 }
 
@@ -84,25 +85,20 @@ enum TimeRange {
   THREE_MONTH
   SIX_MONTH
   YEAR
-  TWO_YEARS
   FIVE_YEARS
-  TEN_YEARS
   YTD
   MAX
 }
 
 enum Interval {
-  MINUTE
-  TWO_MINUTES
   FIVE_MINUTES
   FIFTEEN_MINUTES
   THIRTY_MINUTES
   HOUR
-  FOUR_HOURS
   DAY
   WEEK
   MONTH
-  YEAR
+  THREE_MONTH
 }
 
 type PricePoint {

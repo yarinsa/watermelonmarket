@@ -104,6 +104,7 @@ export enum MarketState {
   Pre = 'PRE',
   Regular = 'REGULAR',
   Post = 'POST',
+  Postpost = 'POSTPOST',
   Closed = 'CLOSED'
 }
 
@@ -114,25 +115,20 @@ export enum TimeRange {
   ThreeMonth = 'THREE_MONTH',
   SixMonth = 'SIX_MONTH',
   Year = 'YEAR',
-  TwoYears = 'TWO_YEARS',
   FiveYears = 'FIVE_YEARS',
-  TenYears = 'TEN_YEARS',
   Ytd = 'YTD',
   Max = 'MAX'
 }
 
 export enum Interval {
-  Minute = 'MINUTE',
-  TwoMinutes = 'TWO_MINUTES',
   FiveMinutes = 'FIVE_MINUTES',
   FifteenMinutes = 'FIFTEEN_MINUTES',
   ThirtyMinutes = 'THIRTY_MINUTES',
   Hour = 'HOUR',
-  FourHours = 'FOUR_HOURS',
   Day = 'DAY',
   Week = 'WEEK',
   Month = 'MONTH',
-  Year = 'YEAR'
+  ThreeMonth = 'THREE_MONTH'
 }
 
 export type PricePoint = {
@@ -157,19 +153,6 @@ export type GetChartQuery = (
       { __typename?: 'PricePoint' }
       & Pick<PricePoint, 'time' | 'price'>
     )> }
-  ) }
-);
-
-export type SearchQueryVariables = {
-  query: Scalars['ID'];
-};
-
-
-export type SearchQuery = (
-  { __typename?: 'Query' }
-  & { stock: (
-    { __typename?: 'Stock' }
-    & Pick<Stock, 'type'>
   ) }
 );
 
@@ -213,36 +196,3 @@ export function useGetChartLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type GetChartQueryHookResult = ReturnType<typeof useGetChartQuery>;
 export type GetChartLazyQueryHookResult = ReturnType<typeof useGetChartLazyQuery>;
 export type GetChartQueryResult = ApolloReactCommon.QueryResult<GetChartQuery, GetChartQueryVariables>;
-export const SearchDocument = gql`
-    query Search($query: ID!) {
-  stock(symbol: $query) {
-    type
-  }
-}
-    `;
-
-/**
- * __useSearchQuery__
- *
- * To run a query within a React component, call `useSearchQuery` and pass it any options that fit your needs.
- * When your component renders, `useSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
- * you can use to render your UI.
- *
- * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
- *
- * @example
- * const { data, loading, error } = useSearchQuery({
- *   variables: {
- *      query: // value for 'query'
- *   },
- * });
- */
-export function useSearchQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SearchQuery, SearchQueryVariables>) {
-        return ApolloReactHooks.useQuery<SearchQuery, SearchQueryVariables>(SearchDocument, baseOptions);
-      }
-export function useSearchLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SearchQuery, SearchQueryVariables>) {
-          return ApolloReactHooks.useLazyQuery<SearchQuery, SearchQueryVariables>(SearchDocument, baseOptions);
-        }
-export type SearchQueryHookResult = ReturnType<typeof useSearchQuery>;
-export type SearchLazyQueryHookResult = ReturnType<typeof useSearchLazyQuery>;
-export type SearchQueryResult = ApolloReactCommon.QueryResult<SearchQuery, SearchQueryVariables>;

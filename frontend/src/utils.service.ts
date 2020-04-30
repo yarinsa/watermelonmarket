@@ -40,6 +40,15 @@ export const numberWithLetter = (number: number) => {
 
 export const formatDataToChart = (chartData: any) => {
   return chartData.map((point: any) => {
-    return point.price === 0 ? null : { time: point.time, price: point.price };
+    if (point.price === 0) {
+      return null;
+    } else {
+      return {
+        time: point.time,
+        price: point.price,
+        minimizer: point.price / 10,
+        maximizer: point.price * 2,
+      };
+    }
   });
 };
