@@ -64,6 +64,7 @@ const MainContent = styled.section`
   flex: 1;
   background-color: #ffffff;
   box-shadow: 0 0 16px 0px #dcdcdc;
+  overflow-y: scroll;
 `;
 
 const initialStocks = [
