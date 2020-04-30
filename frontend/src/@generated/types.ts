@@ -105,6 +105,7 @@ export enum MarketState {
   Regular = 'REGULAR',
   Post = 'POST',
   Postpost = 'POSTPOST',
+  Prepre = 'PREPRE',
   Closed = 'CLOSED'
 }
 

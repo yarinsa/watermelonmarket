@@ -45,7 +45,7 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
     }
   }
 
-
+  if (error) console.log(error)
 
   return (
     <Root>

@@ -70,6 +70,7 @@ enum MarketState {
   REGULAR
   POST
   POSTPOST
+  PREPRE
   CLOSED
 }
 

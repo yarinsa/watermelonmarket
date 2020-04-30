@@ -119,7 +119,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
                 const { payload } = props;
                 return [
                   payload.price.toFixed(3),
-                  moment(payload.time).format("MM-DD-YYYY"),
+                  moment(payload.time).format("MM-DD-YYYY HH:mm"),
                 ];
               }}
               labelFormatter={(props) => {

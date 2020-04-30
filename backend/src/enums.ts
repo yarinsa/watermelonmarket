@@ -20,7 +20,8 @@ export enum InstrumentType {
 
 export enum MarketState {
   PRE,
-  REG,
+  PREPRE,
+  REGULAR,
   POST,
   POSTPOST,
   CLOSED,
