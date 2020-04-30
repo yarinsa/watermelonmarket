@@ -24,12 +24,17 @@ export const MoreInfo: React.FC<MoreInfoProps> = ({
   const [selectedTab, setTab] = useState();
   let history = useHistory();
   let location = useLocation();
+
   const handleTabSelection = (tabId: string) => {
     history.push(`/symbol/${symbol}/${tabId}`);
   };
   return (
     <Root>
-      <Tabs onChange={handleTabSelection} className="full-tabs">
+      <Tabs
+        selectedTabId={selectedTab}
+        onChange={handleTabSelection}
+        className="full-tabs"
+      >
         <Tab id="company-profile" title="Company Profile" />
         <Tab id="my-holdings" title="My Holdings" />
       </Tabs>

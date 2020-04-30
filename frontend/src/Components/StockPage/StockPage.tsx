@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import { H1, H3, Spinner, Drawer } from "@blueprintjs/core";
+import { H1, H3, Spinner, Drawer, Button } from "@blueprintjs/core";
 import { KeyStatisticsTable } from "./KeyStatisticsTable";
 import theme from "../../theme/theme.module.scss";
 import { useRouteMatch, useHistory } from "react-router-dom";
@@ -16,7 +16,8 @@ import {
   ResponsiveContainer,
   ComposedChart,
 } from "recharts";
-import { formatDataToChart } from "../../utils.service";
+
+import { formatDataToChart, addCurrencySymbol } from "../../utils.service";
 import { Chart } from "../Chart";
 import { MoreInfo } from "./MoreInfoPage";
 
@@ -33,7 +34,7 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
 
   let history = useHistory();
   const symbol = match?.params.symbol;
-  const handleDrawer = (isOpen: boolean) => {
+  const handleDrawer = (isOpen: boolean, route?: string) => {
     if (isOpen){
       setDrawer(false);
       history.push(`/symbol/${symbol}`)
@@ -41,7 +42,7 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
     } else{
 
       setDrawer(true);
-      history.push(`/symbol/${symbol}/company-profile`)
+      history.push(`/symbol/${symbol}/${route}`)
     }
   }
 
@@ -52,10 +53,10 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
       {!loading && data && (
         <div>
           <Header>
-            <TitleRow>{data.stock.quote.price.toFixed(2)}</TitleRow>
+            <TitleRow>{addCurrencySymbol(data.stock.quote.price.toFixed(2),data.stock.market.currency)}</TitleRow>
             <SecondaryRow>
               <SecondaryText isPositive={data.stock.quote.change > 0}>
-                {data.stock.quote.change.toFixed(2)} (
+                {addCurrencySymbol(data.stock.quote.change.toFixed(2),data.stock.market.currency)} (
                 {data.stock.quote.changePercent.toFixed(2)}%)
               </SecondaryText>
               <Symbol>{data.stock.symbol}</Symbol>
@@ -83,12 +84,15 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
               <CompanyDescription>
                 {data.stock.companyProfile.description}
               </CompanyDescription>
-              <ShowMore onClick={()=>handleDrawer(false)}>Show more</ShowMore>
+              <ShowMore onClick={()=>handleDrawer(false,'company-profile')}>Show more</ShowMore>
               <Drawer isOpen={isDrawerOpen} onClose={() =>handleDrawer(true)}>
                 <MoreInfo {...data.stock}/>
               </Drawer>
             </InfoItem>
           </InfoContainer>
+          <ControlsContainer>
+            <Button intent="primary" onClick={()=>handleDrawer(false,'my-holdings')}>Add To My Holdings</Button>
+          </ControlsContainer>
         </div>
       )}
       {loading && <Loader />}
@@ -183,6 +187,13 @@ const StyledChart = styled(ComposedChart)`
     display: none;
   }
 `;
+
+const ControlsContainer = styled.div`
+  display:flex;
+  flex-direction:row-reverse;
+  padding:10px;
+
+`
 
 const GET_STOCK_INFO = gql`
   query StockInfo($symbol: ID!) {

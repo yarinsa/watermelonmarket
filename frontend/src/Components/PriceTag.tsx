@@ -8,12 +8,7 @@ interface PriceTagProps {
 }
 
 export const PriceTag: React.FC<PriceTagProps> = ({ value, isPositive }) => {
-  return (
-    <StyledTag isPositive={isPositive}>
-      {isPositive !== null && <span>$</span>}
-      {value}
-    </StyledTag>
-  );
+  return <StyledTag isPositive={isPositive}>{value}</StyledTag>;
 };
 
 const StyledTag = styled(Tag)<Partial<PriceTagProps>>`

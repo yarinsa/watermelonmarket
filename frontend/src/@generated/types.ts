@@ -153,7 +153,10 @@ export type GetChartQuery = (
     & { chartData: Array<(
       { __typename?: 'PricePoint' }
       & Pick<PricePoint, 'time' | 'price'>
-    )> }
+    )>, market: (
+      { __typename?: 'Market' }
+      & Pick<Market, 'currency'>
+    ) }
   ) }
 );
 
@@ -165,6 +168,9 @@ export const GetChartDocument = gql`
     chartData(timeRange: $timeRange, interval: $interval) {
       time
       price
+    }
+    market {
+      currency
     }
   }
 }

@@ -91,22 +91,22 @@ $minimal-button-background-color-active: $eg-B3A;
 
 // // "intent": (default, hover, active) - colors
 $button-intents: (
-  'primary': (
+  "primary": (
     $pt-intent-primary,
     darken($pt-intent-primary, 3%),
-    #7039ce,
+    #36ca8d,
   ),
-  'success': (
+  "success": (
     $pt-intent-success,
     $green2,
     $green1,
   ),
-  'warning': (
+  "warning": (
     $pt-intent-warning,
     $orange2,
     $orange1,
   ),
-  'danger': (
+  "danger": (
     $pt-intent-danger,
     $red2,
     $red1,

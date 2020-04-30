@@ -8,7 +8,7 @@ import {
   CartesianGrid,
 } from "recharts";
 import styled from "styled-components";
-import { formatDataToChart } from "../utils.service";
+import { formatDataToChart, addCurrencySymbol } from "../utils.service";
 import gql from "graphql-tag";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { Stock, Interval, TimeRange } from "../@generated/types";
@@ -16,6 +16,7 @@ import { Tabs, Tab, Popover, Button, Menu, MenuItem } from "@blueprintjs/core";
 import moment from "moment";
 
 interface ChartProps extends Partial<Stock> {}
+
 export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
   const [selectedInterval, setInterval] = useState<Interval>(Interval.Day);
   const [selectedRange, setRange] = useState<TimeRange>(TimeRange.Month);
@@ -40,7 +41,8 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
       timeRange: selectedRange,
     },
   });
-
+  if (data) console.log(data);
+  if (error) console.log(error);
   const dropdownMenu = (
     <Menu>
       <MenuItem
@@ -114,18 +116,23 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
               strokeWidth={3}
             />
             <Line type="monotone" dataKey="500" stroke="pink" strokeWidth={3} />
-            <Tooltip
-              formatter={(value, name, props) => {
-                const { payload } = props;
-                return [
-                  payload.price.toFixed(3),
-                  moment(payload.time).format("MM-DD-YYYY HH:mm"),
-                ];
-              }}
-              labelFormatter={(props) => {
-                return "Date / Price";
-              }}
-            />
+            {data && (
+              <Tooltip
+                formatter={(value, name, props) => {
+                  const { payload } = props;
+                  return [
+                    addCurrencySymbol(
+                      payload.price.toFixed(2),
+                      data.stock.market.currency
+                    ),
+                    moment(payload.time).format("MM-DD-YYYY HH:mm"),
+                  ];
+                }}
+                labelFormatter={(props) => {
+                  return "Date | Price";
+                }}
+              />
+            )}
           </StyledChart>
         </ResponsiveContainer>
       </ChartContainer>
@@ -198,6 +205,18 @@ const StyledChart = styled(ComposedChart)`
   .recharts-layer.recharts-line-dots {
     display: none;
   }
+  .recharts-tooltip-wrapper {
+    z-index: 2;
+    .recharts-default-tooltip {
+      background-color: rgb(242, 251, 248);
+      border-radius: 18px;
+      max-height: 60px;
+      line-height: 20px;
+      p {
+        font-family: SF-UI-Text-Bold;
+      }
+    }
+  }
 `;
 
 const IntervalMenu = styled(Popover)`
@@ -213,6 +232,9 @@ const GET_CHART_INFO = gql`
       chartData(timeRange: $timeRange, interval: $interval) {
         time
         price
+      }
+      market {
+        currency
       }
     }
   }

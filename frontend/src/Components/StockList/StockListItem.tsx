@@ -12,7 +12,7 @@ import { Stock, Interval, TimeRange } from "../../@generated/types";
 import { MatchParams } from "../../App";
 import { useQuery } from "@apollo/react-hooks";
 import gql from "graphql-tag";
-import { formatDataToChart } from "../../utils.service";
+import { formatDataToChart, addCurrencySymbol } from "../../utils.service";
 import { ComposedChart, Line } from "recharts";
 
 interface StockListItemProps extends Partial<Stock> {}
@@ -79,7 +79,7 @@ export const StockListItem: React.FC<StockListItemProps> = ({
       </ChartContainer>
       {data ? (
         <PriceTag
-          value={data.stock.quote.price.toFixed(2)}
+          value={addCurrencySymbol(data.stock.quote.price.toFixed(2),data.stock.market.currency)}
           isPositive={data.stock.quote.change > 0}
         />
       ) : (
@@ -147,6 +147,9 @@ const GET_STOCK_INFO = gql`
       chartData(timeRange: $timeRange, interval: $interval) {
         time
         price
+      }
+      market{
+        currency
       }
     }
   }

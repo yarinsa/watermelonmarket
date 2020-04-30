@@ -1,3 +1,5 @@
+import getSymbolFromCurrency from "currency-symbol-map";
+
 //Formatting
 
 export const numberWithCommas = (number: number) => {
@@ -11,6 +13,14 @@ export const fixedPrice = (price: string) => {
 export const fixedPercentage = (percentage: string) => {
   const percentageNumber = percentage.substring(0, percentage.length - 1);
   return parseFloat(percentageNumber).toFixed(3);
+};
+
+export const addCurrencySymbol = (number: number, currencyCode: string) => {
+  if (number > 0) {
+    return getSymbolFromCurrency(currencyCode) + number;
+  } else {
+    return "-" + getSymbolFromCurrency(currencyCode) + Math.abs(number);
+  }
 };
 
 export const numberWithLetter = (number: number) => {

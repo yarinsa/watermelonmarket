@@ -14,7 +14,13 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react"
+    "jsx": "react",
+    "typeRoots": [
+      "./src/@generated",
+      "./src//types",
+      "./src/node_modules/@types"
+    ]
   },
-  "include": ["src", "../deprecated"]
+  "include": ["src", "../deprecated"],
+  "exclude": ["node_modules", "typings"]
 }

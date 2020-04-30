@@ -1,5 +1,5 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js start
+  C:\Program Files\nodejs\node.exe C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add @types/currency-symbol-map
 
 PATH: 
   C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\WINDOWS\system32;C:\WINDOWS;C:\WINDOWS\System32\Wbem;C:\WINDOWS\System32\WindowsPowerShell\v1.0\;C:\WINDOWS\System32\OpenSSH\;C:\Program Files\dotnet\;C:\Program Files\Git\cmd;C:\Program Files\nodejs\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Microsoft SQL Server\Client SDK\ODBC\170\Tools\Binn\;C:\Users\yarin\AppData\Local\Programs\Python\Python38-32;C:\Users\yarin\AppData\Local\Programs\Python\Python38-32\Scripts;C:\Program Files\Amazon\AWSCLIV2\;C:\Users\yarin\scoop\shims;C:\Users\yarin\AppData\Local\Microsoft\WindowsApps;C:\Users\yarin\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\yarin\AppData\Local\GitHubDesktop\bin;C:\Users\yarin\AppData\Roaming\npm;C:\Program Files\heroku\bin
@@ -14,12 +14,17 @@ Platform:
   win32 x64
 
 Trace: 
-  SyntaxError: D:\Coding Academy\robinhood\frontend\package.json: Unexpected token / in JSON at position 3018
-      at JSON.parse (<anonymous>)
-      at C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:1625:59
-      at Generator.next (<anonymous>)
-      at step (C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:310:30)
-      at C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:321:13
+  Error: https://registry.yarnpkg.com/@types%2fcurrency-symbol-map: Not found
+      at Request.params.callback [as _callback] (C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:66987:18)
+      at Request.self.callback (C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:140748:22)
+      at Request.emit (events.js:311:20)
+      at Request.<anonymous> (C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141720:10)
+      at Request.emit (events.js:311:20)
+      at IncomingMessage.<anonymous> (C:\Users\yarin\AppData\Roaming\npm\node_modules\yarn\lib\cli.js:141642:12)
+      at Object.onceWrapper (events.js:417:28)
+      at IncomingMessage.emit (events.js:323:22)
+      at endReadableNT (_stream_readable.js:1204:12)
+      at processTicksAndRejections (internal/process/task_queues.js:84:21)
 
 npm manifest: 
   {
@@ -32,6 +37,14 @@ npm manifest:
       "@babel/core": "7.9.0",
       "@blueprintjs/core": "^3.24.0",
       "@blueprintjs/select": "^3.12.1",
+      "@graphql-codegen/cli": "1.13.3",
+      "@graphql-codegen/fragment-matcher": "1.13.3",
+      "@graphql-codegen/introspection": "1.13.3",
+      "@graphql-codegen/typescript": "1.13.3",
+      "@graphql-codegen/typescript-document-nodes": "1.13.3",
+      "@graphql-codegen/typescript-graphql-files-modules": "1.13.3",
+      "@graphql-codegen/typescript-operations": "1.13.3",
+      "@graphql-codegen/typescript-react-apollo": "1.13.3",
       "@svgr/webpack": "4.3.3",
       "@testing-library/jest-dom": "^4.2.4",
       "@testing-library/react": "^9.3.2",
@@ -47,6 +60,7 @@ npm manifest:
       "@types/styled-components": "^5.0.1",
       "@typescript-eslint/eslint-plugin": "^2.10.0",
       "@typescript-eslint/parser": "^2.10.0",
+      "add": "^2.0.6",
       "apollo-cache-inmemory": "^1.6.5",
       "apollo-client": "^2.6.8",
       "apollo-link-http": "^1.5.17",
@@ -57,7 +71,9 @@ npm manifest:
       "babel-preset-react-app": "^9.1.2",
       "camelcase": "^5.3.1",
       "case-sensitive-paths-webpack-plugin": "2.3.0",
+      "copy-webpack-plugin": "^5.1.1",
       "css-loader": "3.4.2",
+      "currency-symbol-map": "^4.0.4",
       "dotenv": "8.2.0",
       "dotenv-expand": "5.1.0",
       "eslint": "^6.6.0",
@@ -93,6 +109,7 @@ npm manifest:
       "react": "^16.13.1",
       "react-apollo": "^3.1.5",
       "react-app-polyfill": "^1.0.6",
+      "react-app-rewired": "^2.1.5",
       "react-dev-utils": "^10.2.1",
       "react-dom": "^16.13.1",
       "react-router-dom": "^5.1.2",
@@ -110,12 +127,13 @@ npm manifest:
       "webpack": "4.42.0",
       "webpack-dev-server": "3.10.3",
       "webpack-manifest-plugin": "2.2.0",
-      "workbox-webpack-plugin": "4.3.1"
+      "workbox-webpack-plugin": "4.3.1",
+      "yarn": "^1.22.4"
     },
+    "proxy": "http://localhost:3030",
     "scripts": {
-      // "prestart": "yarn codegen",
-      "start": " node  scripts/start.js",
-      "build": "node scripts/build.js",
+      "start": "node scripts/start.js",
+      "build": "yarn codegen && node scripts/build.js",
       "test": "node scripts/test.js",
       "codegen": "graphql-codegen",
       "codegen:watch": "graphql-codegen --watch"
@@ -134,20 +152,6 @@ npm manifest:
         "last 1 firefox version",
         "last 1 safari version"
       ]
-    },
-    "devDependencies": {
-      "@graphql-codegen/cli": "1.13.3",
-      "@graphql-codegen/fragment-matcher": "1.13.3",
-      "@graphql-codegen/introspection": "1.13.3",
-      "@graphql-codegen/typescript": "1.13.3",
-      "@graphql-codegen/typescript-document-nodes": "1.13.3",
-      "@graphql-codegen/typescript-graphql-files-modules": "1.13.3",
-      "@graphql-codegen/typescript-operations": "1.13.3",
-      "@graphql-codegen/typescript-react-apollo": "1.13.3",
-      "add": "^2.0.6",
-      "copy-webpack-plugin": "^5.1.1",
-      "react-app-rewired": "^2.1.5",
-      "yarn": "^1.22.4"
     },
     "jest": {
       "roots": [
@@ -4798,6 +4802,11 @@ Lockfile:
     version "2.6.10"
     resolved "https://registry.yarnpkg.com/csstype/-/csstype-2.6.10.tgz#e63af50e66d7c266edb6b32909cfd0aabe03928b"
     integrity sha512-D34BqZU4cIlMCY93rZHbrq9pjTAQJ3U8S8rfBqjwHxkGPThWFjzZDQpgMJY0QViLxth6ZKYiwFBo14RdN44U/w==
+  
+  currency-symbol-map@^4.0.4:
+    version "4.0.4"
+    resolved "https://registry.yarnpkg.com/currency-symbol-map/-/currency-symbol-map-4.0.4.tgz#3cfba625974dd3f86822d327ecbd10248695e95e"
+    integrity sha512-hkSCCopJXVsvIZIiumJc6FoNXR5LQ646c3ufzF0yfv3155PYygysHw24JuzPSg4j86EFpvtgeX+vEhzRtcJ5Ag==
   
   currently-unhandled@^0.4.1:
     version "0.4.1"
