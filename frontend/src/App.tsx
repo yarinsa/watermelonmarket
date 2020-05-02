@@ -5,16 +5,21 @@ import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components/macro";
 import { Sidebar } from "./Components/Sidebar/Sidebar";
 import { Search } from "./Components/Search";
+// TODO:
+// import { StockList } from "./Components/StockList";
 import { StockList } from "./Components/StockList/StockList";
 import { StockPage } from "./Components/StockPage/StockPage";
 
+// TODO: move somewhere else
 export interface MatchParams {
   symbol?: string;
 }
 
 const App: React.FC = () => {
+  // TODO: remove initialStock
   const [stocks, setStocks] = useState(initialStocks);
 
+  // TODO: move to inline
   const handleSearch = (data: any) => {
     setStocks(data);
   };
@@ -22,16 +27,18 @@ const App: React.FC = () => {
   return (
     <Root>
       <Router>
+        {/* TODO: NavSidebar */}
         <Sidebar />
+        {/* TODO: Put Switch here */}
+        {/* TODO: ListSection => StocksSidebar */}
         <ListSection>
           <Search onSearch={handleSearch} />
           {stocks && <StockList stocks={stocks} />}
         </ListSection>
         <MainContent>
           <Switch>
-            <Route path={`/symbol/:symbol`}>
-              <StockPage />
-            </Route>
+            {/* TODO: create routes.ts */}
+            <Route path={`/symbol/:symbol`} component={StockPage} />
           </Switch>
         </MainContent>
       </Router>

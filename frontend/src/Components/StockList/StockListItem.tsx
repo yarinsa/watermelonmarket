@@ -12,17 +12,27 @@ import gql from "graphql-tag";
 import { formatDataToChart, addCurrencySymbol } from "../../utils.service";
 import { ComposedChart, Line } from "recharts";
 
-interface StockListItemProps extends Partial<Stock> {}
+// TODO:
+// type StockListItemProps = Pick< ...
+interface StockListItemProps extends Partial<Stock> {
+  // TODO: move logic up to parent, get active instead
+  // active: boolean;
+}
 
 export const StockListItem: React.FC<StockListItemProps> = ({
   symbol,
   name,
+  // TODO: unused
   quote,
 }) => {
   let history = useHistory();
 
+  // TODO: code duplicated
+  // TODO: const { symbol } = useParams<MatchParams>();
   let match = useRouteMatch<MatchParams>("/symbol/:symbol");
 
+  // TODO: unused
+  // TODO: move query up.
   const { data, loading, error } = useQuery(GET_STOCK_INFO, {
     variables: {
       symbol: symbol,
@@ -31,10 +41,14 @@ export const StockListItem: React.FC<StockListItemProps> = ({
     },
   });
 
+  // TODO: unused
+  // TODO: inline
   const handleClick = (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // TODO: move logic up
     history.push(`/symbol/${symbol}`);
   };
 
+  // TODO: remove
   // if (error) console.log(error);
 
   return (
@@ -42,6 +56,8 @@ export const StockListItem: React.FC<StockListItemProps> = ({
       isActive={match?.params.symbol === symbol}
       onClick={(event) => handleClick(event)}
     >
+      {/* TODO: StockDetails */}
+      {/* TODO: maybe create generic List component */}
       <Info>
         <Title>{symbol}</Title>
         <Subtitle>{name}</Subtitle>
