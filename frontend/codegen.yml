@@ -5,8 +5,7 @@ generates:
   # TS Types for out source code:
   ./src/@generated/types.ts:
     documents:
-      - "./src/*/**.{ts,tsx}"
-      - "./src/**.{ts,tsx}"
+      - "./src/**/*.{ts,tsx}"
       # Exclude the generated files, so we don't get duplications
       - "!./src/@generated/**"
     plugins:
