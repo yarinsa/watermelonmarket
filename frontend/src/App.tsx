@@ -1,17 +1,10 @@
 import React, { useState } from "react";
 import "./index.css";
 import "./theme/_index.scss";
-import {
-  Route,
-  Switch,
-  BrowserRouter as Router,
-  RouteComponentProps,
-} from "react-router-dom";
+import { Route, Switch, BrowserRouter as Router } from "react-router-dom";
 import styled from "styled-components/macro";
-import gql from "graphql-tag";
-import { useQuery } from "@apollo/react-hooks";
 import { Sidebar } from "./Components/Sidebar/Sidebar";
-import { Search } from "./Components/Search/Search/Search";
+import { Search } from "./Components/Search";
 import { StockList } from "./Components/StockList/StockList";
 import { StockPage } from "./Components/StockPage/StockPage";
 
@@ -21,6 +14,7 @@ export interface MatchParams {
 
 const App: React.FC = () => {
   const [stocks, setStocks] = useState(initialStocks);
+
   const handleSearch = (data: any) => {
     setStocks(data);
   };
@@ -34,7 +28,6 @@ const App: React.FC = () => {
           {stocks && <StockList stocks={stocks} />}
         </ListSection>
         <MainContent>
-          {/* {data && <h1>{data.selectedStock}</h1>} */}
           <Switch>
             <Route path={`/symbol/:symbol`}>
               <StockPage />

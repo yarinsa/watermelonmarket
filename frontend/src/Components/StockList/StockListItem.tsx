@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components/macro";
-import { PriceTag } from "../PriceTag";
-import { H4 } from "@blueprintjs/core";
+import { H4, Tag } from "@blueprintjs/core";
 import {
   useHistory,
-  useParams,
   useRouteMatch,
-  RouteComponentProps,
 } from "react-router-dom";
 import { Stock, Interval, TimeRange } from "../../@generated/types";
 import { MatchParams } from "../../App";
@@ -77,13 +74,8 @@ export const StockListItem: React.FC<StockListItemProps> = ({
           </ComposedChart>
         )}
       </ChartContainer>
-      {data ? (
-        <PriceTag
-          value={addCurrencySymbol(data.stock.quote.price.toFixed(2),data.stock.market.currency)}
-          isPositive={data.stock.quote.change > 0}
-        />
-      ) : (
-        <PriceTag value={""} isPositive={null} />
+      {data && (
+        <StyledTag isPositive={data.stock.quote.change > 0}>{addCurrencySymbol(data.stock.quote.price.toFixed(2),data.stock.market.currency)}</StyledTag>
       )}
     </Root>
   );
@@ -135,6 +127,20 @@ const ChartContainer = styled.div`
   .recharts-wrapper{
     cursor: pointer !important;
   }
+`;
+
+const StyledTag = styled(Tag)<{isPositive:boolean}>`
+  background-color: ${(props) => {
+    if (props.isPositive === null) {
+      return "#999";
+    } else if (props.isPositive) {
+      return "#21ce99";
+    } else {
+      return "#FF4D2D";
+    }
+  }};
+  padding: 4px 8px;
+  text-align: center;
 `;
 
 const GET_STOCK_INFO = gql`

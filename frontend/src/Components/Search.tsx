@@ -6,7 +6,7 @@ import gql from "graphql-tag";
 import { useQuery, useLazyQuery } from "@apollo/react-hooks";
 import { debounce } from "lodash";
 import { useHistory } from "react-router-dom";
-import { ReactComponent as Loader } from "../../../assets/EllipsisLoader.svg";
+import { ReactComponent as Loader } from "../assets/EllipsisLoader.svg";
 
 export interface ISearchOption {
   symbol: string;

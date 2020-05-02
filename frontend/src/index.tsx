@@ -19,8 +19,6 @@ const client = new ApolloClient({
   link,
 });
 
-const initialSymbols = ["TSLA", "AAPL", "MSFT", "TQQQ", "CSPX", "DAL", "LUV"];
-
 ReactDOM.render(
   <ApolloProvider client={client}>
     <App />

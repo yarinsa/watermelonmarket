@@ -160,6 +160,19 @@ export type GetChartQuery = (
   ) }
 );
 
+export type SearchQueryVariables = {
+  query: Scalars['String'];
+};
+
+
+export type SearchQuery = (
+  { __typename?: 'Query' }
+  & { searchStock: Array<(
+    { __typename?: 'Stock' }
+    & Pick<Stock, 'name' | 'symbol'>
+  )> }
+);
+
 
 export const GetChartDocument = gql`
     query getChart($symbol: ID!, $timeRange: TimeRange!, $interval: Interval!) {
@@ -203,3 +216,37 @@ export function useGetChartLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHoo
 export type GetChartQueryHookResult = ReturnType<typeof useGetChartQuery>;
 export type GetChartLazyQueryHookResult = ReturnType<typeof useGetChartLazyQuery>;
 export type GetChartQueryResult = ApolloReactCommon.QueryResult<GetChartQuery, GetChartQueryVariables>;
+export const SearchDocument = gql`
+    query Search($query: String!) {
+  searchStock(query: $query) {
+    name
+    symbol
+  }
+}
+    `;
+
+/**
+ * __useSearchQuery__
+ *
+ * To run a query within a React component, call `useSearchQuery` and pass it any options that fit your needs.
+ * When your component renders, `useSearchQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useSearchQuery({
+ *   variables: {
+ *      query: // value for 'query'
+ *   },
+ * });
+ */
+export function useSearchQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<SearchQuery, SearchQueryVariables>) {
+        return ApolloReactHooks.useQuery<SearchQuery, SearchQueryVariables>(SearchDocument, baseOptions);
+      }
+export function useSearchLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<SearchQuery, SearchQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<SearchQuery, SearchQueryVariables>(SearchDocument, baseOptions);
+        }
+export type SearchQueryHookResult = ReturnType<typeof useSearchQuery>;
+export type SearchLazyQueryHookResult = ReturnType<typeof useSearchLazyQuery>;
+export type SearchQueryResult = ApolloReactCommon.QueryResult<SearchQuery, SearchQueryVariables>;

@@ -12,11 +12,11 @@ import {
 import { CompanyProfile } from "./CompanyProfile";
 import { ReactComponent as NothingYet } from "../../assets/nothing-here-yet.svg";
 
-interface MoreInfoProps extends Partial<Stock> {
+interface DrawerContentProps extends Partial<Stock> {
   name: string;
 }
 
-export const MoreInfo: React.FC<MoreInfoProps> = ({
+export const DrawerContent: React.FC<DrawerContentProps> = ({
   symbol,
   companyProfile,
   name,

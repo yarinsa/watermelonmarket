@@ -8,18 +8,9 @@ import { MatchParams } from "../../App";
 import gql from "graphql-tag";
 import { useQuery } from "@apollo/react-hooks";
 import { ReactComponent as Loader } from "../../assets/Loader.svg";
-import {
-  LineChart,
-  Line,
-  Legend,
-  Tooltip,
-  ResponsiveContainer,
-  ComposedChart,
-} from "recharts";
-
 import { formatDataToChart, addCurrencySymbol } from "../../utils.service";
 import { Chart } from "../Chart";
-import { MoreInfo } from "./MoreInfoPage";
+import { DrawerContent } from "./DrawerContent";
 
 interface StockPageProps {}
 
@@ -86,7 +77,7 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
               </CompanyDescription>
               <ShowMore onClick={()=>handleDrawer(false,'company-profile')}>Show more</ShowMore>
               <Drawer isOpen={isDrawerOpen} onClose={() =>handleDrawer(true)}>
-                <MoreInfo {...data.stock}/>
+                <DrawerContent {...data.stock}/>
               </Drawer>
             </InfoItem>
           </InfoContainer>
@@ -182,11 +173,6 @@ const ShowMore = styled.a`
   font-weight: 800;
 `;
 
-const StyledChart = styled(ComposedChart)`
-  .recharts-layer.recharts-line-dots {
-    display: none;
-  }
-`;
 
 const ControlsContainer = styled.div`
   display:flex;
