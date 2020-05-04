@@ -8,9 +8,7 @@ interface MenuProps {}
 export const Menu: React.FC<MenuProps> = ({}) => {
     return (
         <MenuList>
-            <MenuListItem exact to="/stocks">
-                My Stocks
-            </MenuListItem>
+            <MenuListItem to="/stocks">My Stocks</MenuListItem>
         </MenuList>
     );
 };
