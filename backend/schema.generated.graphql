@@ -99,5 +99,9 @@ enum Interval {
 
 type PricePoint {
   time: MyDate!
-  price: Float!
+  open: Float!
+  high: Float!
+  low: Float!
+  close: Float!
+  volume: Float!
 }

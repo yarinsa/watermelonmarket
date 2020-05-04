@@ -111,7 +111,11 @@ export { Interval };
 export type PricePoint = {
    __typename?: 'PricePoint';
   time: Scalars['MyDate'];
-  price: Scalars['Float'];
+  open: Scalars['Float'];
+  high: Scalars['Float'];
+  low: Scalars['Float'];
+  close: Scalars['Float'];
+  volume: Scalars['Float'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -298,7 +302,11 @@ export type MarketResolvers<ContextType = MyContext, ParentType extends Resolver
 
 export type PricePointResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['PricePoint'] = ResolversParentTypes['PricePoint']> = ResolversObject<{
   time?: Resolver<ResolversTypes['MyDate'], ParentType, ContextType>,
-  price?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  open?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  high?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  low?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  close?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  volume?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 

@@ -1,31 +1,20 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import * as serviceWorker from "./serviceWorker";
-import { ApolloClient } from "apollo-client";
-import { ApolloProvider } from "@apollo/react-hooks";
-import { InMemoryCache } from "apollo-cache-inmemory";
-import { HttpLink } from "apollo-link-http";
-
-// TODO: move to apolloClient.ts
-const cache = new InMemoryCache();
-const link = new HttpLink({
-  uri: "/graphql",
-  fetch,
-});
-
-const client = new ApolloClient({
-  cache,
-  link,
-});
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import * as serviceWorker from './serviceWorker';
+import { ApolloProvider } from '@apollo/react-hooks';
+import { client } from './apolloClient';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 ReactDOM.render(
-  <ApolloProvider client={client}>
-    <App />
-  </ApolloProvider>,
+    <ApolloProvider client={client}>
+        <Router>
+            <App />
+        </Router>
+    </ApolloProvider>,
 
-  document.getElementById("root")
+    document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

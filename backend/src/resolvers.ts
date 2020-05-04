@@ -118,7 +118,11 @@ const Stock: StockResolvers = {
     );
     return result.map((chartPoint: any) => ({
       time: chartPoint.date,
-      price: chartPoint.close,
+      open: chartPoint.open,
+      high: chartPoint.high,
+      low: chartPoint.low,
+      close: chartPoint.close,
+      volume: chartPoint.volume,
     }));
   },
 };

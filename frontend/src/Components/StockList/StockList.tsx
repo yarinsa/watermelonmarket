@@ -1,20 +1,34 @@
-import React from "react";
-import styled from "styled-components/macro";
-import { StockListItem } from "./StockListItem";
-import { Stock } from "../../@generated/types";
+import React from 'react';
+import styled from 'styled-components/macro';
+import { StockListItem } from './StockListItem';
+import { Stock } from '../../@generated/types';
+import { useParams, useHistory } from 'react-router-dom';
+import { MatchParams } from '../../routes';
 
 interface StockListProps {
-  // TODO:
-  // stocks: Pick<Stock, 'chartData' | 'name'>[];
-  stocks: Partial<Stock>[];
+    stocks: Pick<Stock, 'name' | 'symbol'>[];
 }
 
 export const StockList: React.FC<StockListProps> = ({ stocks }) => {
-  const StockItems = stocks.map((stock, index) => (
-    <StockListItem key={index} {...stock} />
-  ));
+    let { symbol } = useParams<MatchParams>();
+    console.log(symbol);
+    let history = useHistory();
+    const handleClick = (symbol: string) => {
+        history.push(`/stocks/${symbol}`);
+    };
 
-  return <Root>{stocks && StockItems}</Root>;
+    const StockItems = stocks.map(
+        (stock: Pick<Stock, 'name' | 'symbol'>, index) => (
+            <StockListItem
+                key={index}
+                {...stock}
+                isActive={symbol === stock.symbol}
+                onStockSelect={handleClick}
+            />
+        )
+    );
+
+    return <Root>{stocks && StockItems}</Root>;
 };
 
 // TODO: remove

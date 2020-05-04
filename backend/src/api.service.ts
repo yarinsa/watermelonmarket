@@ -72,15 +72,15 @@ export class StocksApi extends RESTDataSource {
 
   _extractChartData(fetchedData: any): any {
     let result = fetchedData.chart.result[0];
-    let ohlcv = result.indicators.quote[0];
+    let quote = result.indicators.quote[0];
     return result.timestamp.map((timestamp: number, index: number) => {
       return {
         date: timestamp,
-        open: +ohlcv.open[index],
-        high: +ohlcv.high[index],
-        low: +ohlcv.low[index],
-        close: +ohlcv.close[index],
-        volume: +ohlcv.volume[index],
+        open: +quote.open[index],
+        high: +quote.high[index],
+        low: +quote.low[index],
+        close: +quote.close[index],
+        volume: +quote.volume[index],
       };
     });
   }
