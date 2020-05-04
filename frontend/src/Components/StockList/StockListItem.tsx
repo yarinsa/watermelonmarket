@@ -4,8 +4,8 @@ import { H4, Tag } from '@blueprintjs/core';
 import { Stock, Interval, TimeRange } from '../../@generated/types';
 import { useQuery } from '@apollo/react-hooks';
 import gql from 'graphql-tag';
-import { formatDataToOldChart, addCurrencySymbol } from '../../utils.service';
-import { ComposedChart, Line } from 'recharts';
+import { addCurrencySymbol } from '../../utils.service';
+import Chart from '../Chart';
 
 interface StockListItemProps extends Pick<Stock, 'symbol' | 'name'> {
     isActive: boolean;
@@ -26,7 +26,6 @@ export const StockListItem: React.FC<StockListItemProps> = ({
             timeRange: TimeRange.Month,
         },
     });
-
     return (
         <Root isActive={isActive} onClick={() => onStockSelect(symbol)}>
             <StockDetails>
@@ -34,32 +33,7 @@ export const StockListItem: React.FC<StockListItemProps> = ({
                 <Subtitle>{name}</Subtitle>
             </StockDetails>
             <ChartContainer>
-                {data && (
-                    <ComposedChart
-                        width={60}
-                        height={60}
-                        data={formatDataToOldChart(data.stock.chartData)}
-                    >
-                        <Line
-                            type="monotone"
-                            dataKey="close"
-                            stroke="#21ce99"
-                            strokeWidth={2}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="minimizer"
-                            stroke="transparent"
-                            strokeWidth={3}
-                        />
-                        <Line
-                            type="monotone"
-                            dataKey="maximizer"
-                            stroke="transparent"
-                            strokeWidth={3}
-                        />
-                    </ComposedChart>
-                )}
+                <Chart symbol={symbol} height={60} />
             </ChartContainer>
             {data && (
                 <StyledTag isPositive={data.stock.quote.change > 0}>
@@ -90,7 +64,6 @@ const Root = styled.div<{ isActive: boolean }>`
 
 const StockDetails = styled.div`
     text-transform: uppercase;
-    margin-right: 10px;
 `;
 
 const Title = styled(H4)`
@@ -112,13 +85,9 @@ const Subtitle = styled.span`
 `;
 
 const ChartContainer = styled.div`
+    padding-right: 10px;
     flex: 1;
-    .recharts-layer.recharts-line-dots {
-        display: none;
-    }
-    .recharts-wrapper {
-        cursor: pointer !important;
-    }
+    max-width: 70px;
 `;
 
 const StyledTag = styled(Tag)<{ isPositive: boolean }>`
@@ -149,6 +118,12 @@ const GET_STOCK_INFO = gql`
             chartData(timeRange: $timeRange, interval: $interval) {
                 time
                 close
+                time
+                close
+                open
+                high
+                low
+                volume
             }
             market {
                 currency

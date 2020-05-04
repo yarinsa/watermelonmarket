@@ -9,7 +9,7 @@ import { useQuery } from '@apollo/react-hooks';
 import { ReactComponent as Loader } from '../../assets/Loader.svg';
 import { ReactComponent as Placeholder } from '../../assets/no-stock-placeholder.svg';
 import { formatDataToChart, addCurrencySymbol } from '../../utils.service';
-import { Chart } from '../Chart';
+import { Chart } from '../Chart/Chart';
 import { DrawerContent } from './DrawerContent';
 import { MatchParams } from '../../routes';
 
@@ -78,6 +78,11 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
                         <Chart
                             chartData={data.stock.chartData}
                             symbol={data.stock.symbol}
+                            tabs
+                            interval
+                            tooltip
+                            averageLine
+                            height={220}
                         />
                     </ChartContainer>
                     <InfoContainer>

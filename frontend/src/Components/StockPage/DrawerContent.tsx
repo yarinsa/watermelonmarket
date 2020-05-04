@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Stock } from '../../@generated/types';
 import styled from 'styled-components/macro';
 import { Tab, Tabs } from '@blueprintjs/core';
-import { useHistory, useLocation, Switch, Route } from 'react-router-dom';
+import { useHistory, Switch, Route } from 'react-router-dom';
 import { CompanyProfile } from './CompanyProfile';
 import { ReactComponent as NothingYet } from '../../assets/nothing-here-yet.svg';
 

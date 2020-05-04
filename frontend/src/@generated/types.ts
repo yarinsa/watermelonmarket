@@ -193,7 +193,7 @@ export type StockInfoQuery = (
       & Pick<Quote, 'price' | 'change'>
     ), chartData: Array<(
       { __typename?: 'PricePoint' }
-      & Pick<PricePoint, 'time' | 'close'>
+      & Pick<PricePoint, 'time' | 'close' | 'open' | 'high' | 'low' | 'volume'>
     )>, market: (
       { __typename?: 'Market' }
       & Pick<Market, 'currency'>
@@ -321,6 +321,12 @@ export const StockInfoDocument = gql`
     chartData(timeRange: $timeRange, interval: $interval) {
       time
       close
+      time
+      close
+      open
+      high
+      low
+      volume
     }
     market {
       currency

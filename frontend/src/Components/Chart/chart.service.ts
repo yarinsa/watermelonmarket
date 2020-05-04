@@ -1,54 +1,11 @@
-import getSymbolFromCurrency from 'currency-symbol-map';
+import { PricePoint } from '../../@generated/types';
+import { ChartComponentProps } from 'react-chartjs-2';
 
-//Formatting
-
-export const numberWithCommas = (number: number) => {
-    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
-};
-
-export const fixedPrice = (price: string) => {
-    return parseFloat(price).toFixed(3);
-};
-
-export const fixedPercentage = (percentage: string) => {
-    const percentageNumber = percentage.substring(0, percentage.length - 1);
-    return parseFloat(percentageNumber).toFixed(3);
-};
-
-export const addCurrencySymbol = (number: number, currencyCode: string) => {
-    if (number > 0) {
-        return getSymbolFromCurrency(currencyCode) + number;
-    } else {
-        return '-' + getSymbolFromCurrency(currencyCode) + Math.abs(number);
-    }
-};
-
-export const numberWithLetter = (number: number) => {
-    if (isNaN(number)) return number;
-
-    if (number < 9999) {
-        return number;
-    }
-
-    if (number < 1000000) {
-        return Math.round(number / 1000) + 'K';
-    }
-    if (number < 10000000) {
-        return (number / 1000000).toFixed(2) + 'M';
-    }
-
-    if (number < 1000000000) {
-        return Math.round(number / 1000000) + 'M';
-    }
-
-    if (number < 1000000000000) {
-        return Math.round(number / 1000000000) + 'B';
-    }
-
-    return '1T+';
-};
-
-export const formatDataToChart = (chartData: any) => {
+export const dataFormatter = (
+    chartData: PricePoint[],
+    renderAverageLine: boolean | undefined
+): ChartComponentProps['data'] => {
+    const dataToReturn: ChartComponentProps['data'] = {};
     let close: number[] = [];
     let high: number[] = [];
     let open: number[] = [];
@@ -56,7 +13,8 @@ export const formatDataToChart = (chartData: any) => {
     let labels: string[] = [];
     let lowest: number = chartData[0].close;
     let highest: number = 0;
-    const newData = chartData.map((point: any) => {
+
+    chartData.map((point: any) => {
         if (point.close === 0) {
             return null;
         } else {
@@ -73,14 +31,17 @@ export const formatDataToChart = (chartData: any) => {
             low.push(point.low.toFixed(2));
         }
     });
+
     const avg = new Array(chartData.length).fill(
         ((lowest + highest) / 2).toFixed(2)
     );
-    const datasets = [
+
+    dataToReturn.labels = labels;
+    dataToReturn.datasets = [
         {
             label: 'close',
             data: close,
-            pointHoverBorderWidth: 2,
+            pointHoverBorderWidth: 0,
             pointRadius: 0,
             fill: false,
             pointBorderColor: '#3dcc91',
@@ -91,7 +52,7 @@ export const formatDataToChart = (chartData: any) => {
         {
             label: 'high',
             data: high,
-            pointHoverBorderWidth: 2,
+            pointHoverBorderWidth: 0,
             pointRadius: 0,
             fill: false,
             pointBorderColor: '#238C2C',
@@ -101,7 +62,7 @@ export const formatDataToChart = (chartData: any) => {
         {
             label: 'open',
             data: open,
-            pointHoverBorderWidth: 2,
+            pointHoverBorderWidth: 0,
             pointRadius: 0,
             fill: false,
             pointBorderColor: '#2965CC',
@@ -111,14 +72,16 @@ export const formatDataToChart = (chartData: any) => {
         {
             label: 'low',
             data: low,
-            pointHoverBorderWidth: 2,
+            pointHoverBorderWidth: 0,
             pointRadius: 0,
             fill: false,
             pointBorderColor: '#DB3737',
             borderColor: ['transparent'],
             borderWidth: 0,
         },
-        {
+    ];
+    if (renderAverageLine) {
+        dataToReturn.datasets.push({
             label: 'Chart Avg.',
             data: avg,
             pointHoverBorderWidth: 0,
@@ -129,24 +92,7 @@ export const formatDataToChart = (chartData: any) => {
             borderWidth: 1,
             hideInLegendAndTooltip: true,
             borderDash: [10],
-        },
-    ];
-    return {
-        labels: labels,
-        datasets: datasets,
-    };
-};
-export const formatDataToOldChart = (chartData: any) => {
-    return chartData.map((point: any) => {
-        if (point.close === 0) {
-            return null;
-        } else {
-            return {
-                time: point.time,
-                close: point.close,
-                minimizer: point.close / 10,
-                maximizer: point.close * 2,
-            };
-        }
-    });
+        });
+    }
+    return dataToReturn;
 };
