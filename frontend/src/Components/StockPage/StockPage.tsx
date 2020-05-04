@@ -215,7 +215,7 @@ const PlaceholderContainer = styled.div`
 `;
 
 const GET_STOCK_INFO = gql`
-    query StockInfo($symbol: ID!) {
+    query StockInfoForPage($symbol: ID!) {
         stock(symbol: $symbol) {
             name
             symbol

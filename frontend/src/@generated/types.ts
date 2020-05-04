@@ -135,7 +135,11 @@ export enum Interval {
 export type PricePoint = {
    __typename?: 'PricePoint';
   time: Scalars['MyDate'];
-  price: Scalars['Float'];
+  open: Scalars['Float'];
+  high: Scalars['Float'];
+  low: Scalars['Float'];
+  close: Scalars['Float'];
+  volume: Scalars['Float'];
 };
 
 export type GetChartQueryVariables = {
@@ -152,7 +156,7 @@ export type GetChartQuery = (
     & Pick<Stock, 'symbol'>
     & { chartData: Array<(
       { __typename?: 'PricePoint' }
-      & Pick<PricePoint, 'time' | 'price'>
+      & Pick<PricePoint, 'time' | 'close' | 'open' | 'high' | 'low' | 'volume'>
     )>, market: (
       { __typename?: 'Market' }
       & Pick<Market, 'currency'>
@@ -173,6 +177,59 @@ export type SearchQuery = (
   )> }
 );
 
+export type StockInfoQueryVariables = {
+  symbol: Scalars['ID'];
+  timeRange: TimeRange;
+  interval: Interval;
+};
+
+
+export type StockInfoQuery = (
+  { __typename?: 'Query' }
+  & { stock: (
+    { __typename?: 'Stock' }
+    & { quote: (
+      { __typename?: 'Quote' }
+      & Pick<Quote, 'price' | 'change'>
+    ), chartData: Array<(
+      { __typename?: 'PricePoint' }
+      & Pick<PricePoint, 'time' | 'close'>
+    )>, market: (
+      { __typename?: 'Market' }
+      & Pick<Market, 'currency'>
+    ) }
+  ) }
+);
+
+export type StockInfoForPageQueryVariables = {
+  symbol: Scalars['ID'];
+};
+
+
+export type StockInfoForPageQuery = (
+  { __typename?: 'Query' }
+  & { stock: (
+    { __typename?: 'Stock' }
+    & Pick<Stock, 'name' | 'symbol'>
+    & { quote: (
+      { __typename?: 'Quote' }
+      & Pick<Quote, 'price' | 'open' | 'high' | 'low' | 'change' | 'changePercent' | 'volume' | 'averageVolume'>
+    ), companyProfile: (
+      { __typename?: 'CompanyProfile' }
+      & Pick<CompanyProfile, 'description' | 'address' | 'phoneNumber' | 'website' | 'sector' | 'industry' | 'fullTimeEmployees'>
+    ), priceHistory: (
+      { __typename?: 'PriceHistory' }
+      & Pick<PriceHistory, 'fiftyTwoWeekLow' | 'fiftyTwoWeekHigh'>
+    ), market: (
+      { __typename?: 'Market' }
+      & Pick<Market, 'marketState' | 'exchangeName' | 'currency'>
+    ), chartData: Array<(
+      { __typename?: 'PricePoint' }
+      & Pick<PricePoint, 'time' | 'close' | 'open' | 'high' | 'low' | 'volume'>
+    )> }
+  ) }
+);
+
 
 export const GetChartDocument = gql`
     query getChart($symbol: ID!, $timeRange: TimeRange!, $interval: Interval!) {
@@ -180,7 +237,11 @@ export const GetChartDocument = gql`
     symbol
     chartData(timeRange: $timeRange, interval: $interval) {
       time
-      price
+      close
+      open
+      high
+      low
+      volume
     }
     market {
       currency
@@ -250,3 +311,119 @@ export function useSearchLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookO
 export type SearchQueryHookResult = ReturnType<typeof useSearchQuery>;
 export type SearchLazyQueryHookResult = ReturnType<typeof useSearchLazyQuery>;
 export type SearchQueryResult = ApolloReactCommon.QueryResult<SearchQuery, SearchQueryVariables>;
+export const StockInfoDocument = gql`
+    query StockInfo($symbol: ID!, $timeRange: TimeRange!, $interval: Interval!) {
+  stock(symbol: $symbol) {
+    quote {
+      price
+      change
+    }
+    chartData(timeRange: $timeRange, interval: $interval) {
+      time
+      close
+    }
+    market {
+      currency
+    }
+  }
+}
+    `;
+
+/**
+ * __useStockInfoQuery__
+ *
+ * To run a query within a React component, call `useStockInfoQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStockInfoQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStockInfoQuery({
+ *   variables: {
+ *      symbol: // value for 'symbol'
+ *      timeRange: // value for 'timeRange'
+ *      interval: // value for 'interval'
+ *   },
+ * });
+ */
+export function useStockInfoQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StockInfoQuery, StockInfoQueryVariables>) {
+        return ApolloReactHooks.useQuery<StockInfoQuery, StockInfoQueryVariables>(StockInfoDocument, baseOptions);
+      }
+export function useStockInfoLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StockInfoQuery, StockInfoQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StockInfoQuery, StockInfoQueryVariables>(StockInfoDocument, baseOptions);
+        }
+export type StockInfoQueryHookResult = ReturnType<typeof useStockInfoQuery>;
+export type StockInfoLazyQueryHookResult = ReturnType<typeof useStockInfoLazyQuery>;
+export type StockInfoQueryResult = ApolloReactCommon.QueryResult<StockInfoQuery, StockInfoQueryVariables>;
+export const StockInfoForPageDocument = gql`
+    query StockInfoForPage($symbol: ID!) {
+  stock(symbol: $symbol) {
+    name
+    symbol
+    quote {
+      price
+      open
+      high
+      low
+      change
+      changePercent
+      volume
+      averageVolume
+    }
+    companyProfile {
+      description
+      address
+      phoneNumber
+      website
+      sector
+      industry
+      sector
+      fullTimeEmployees
+    }
+    priceHistory {
+      fiftyTwoWeekLow
+      fiftyTwoWeekHigh
+    }
+    market {
+      marketState
+      exchangeName
+      currency
+    }
+    chartData(timeRange: YEAR, interval: DAY) {
+      time
+      close
+      open
+      high
+      low
+      volume
+    }
+  }
+}
+    `;
+
+/**
+ * __useStockInfoForPageQuery__
+ *
+ * To run a query within a React component, call `useStockInfoForPageQuery` and pass it any options that fit your needs.
+ * When your component renders, `useStockInfoForPageQuery` returns an object from Apollo Client that contains loading, error, and data properties
+ * you can use to render your UI.
+ *
+ * @param baseOptions options that will be passed into the query, supported options are listed on: https://www.apollographql.com/docs/react/api/react-hooks/#options;
+ *
+ * @example
+ * const { data, loading, error } = useStockInfoForPageQuery({
+ *   variables: {
+ *      symbol: // value for 'symbol'
+ *   },
+ * });
+ */
+export function useStockInfoForPageQuery(baseOptions?: ApolloReactHooks.QueryHookOptions<StockInfoForPageQuery, StockInfoForPageQueryVariables>) {
+        return ApolloReactHooks.useQuery<StockInfoForPageQuery, StockInfoForPageQueryVariables>(StockInfoForPageDocument, baseOptions);
+      }
+export function useStockInfoForPageLazyQuery(baseOptions?: ApolloReactHooks.LazyQueryHookOptions<StockInfoForPageQuery, StockInfoForPageQueryVariables>) {
+          return ApolloReactHooks.useLazyQuery<StockInfoForPageQuery, StockInfoForPageQueryVariables>(StockInfoForPageDocument, baseOptions);
+        }
+export type StockInfoForPageQueryHookResult = ReturnType<typeof useStockInfoForPageQuery>;
+export type StockInfoForPageLazyQueryHookResult = ReturnType<typeof useStockInfoForPageLazyQuery>;
+export type StockInfoForPageQueryResult = ApolloReactCommon.QueryResult<StockInfoForPageQuery, StockInfoForPageQueryVariables>;
