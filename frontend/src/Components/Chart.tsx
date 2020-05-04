@@ -128,6 +128,7 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
                                 ],
                                 yAxes: [
                                     {
+                                        display: false,
                                         gridLines: {
                                             display: false,
                                             drawOnChartArea: true,
