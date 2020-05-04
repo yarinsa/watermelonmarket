@@ -1,17 +1,16 @@
 import React, { useState } from 'react';
 import styled from 'styled-components/macro';
-import { H1, H3, Spinner, Drawer, Button } from '@blueprintjs/core';
+import { H1, H3, Drawer, Button } from '@blueprintjs/core';
 import { KeyStatisticsTable } from './KeyStatisticsTable';
 import theme from '../../theme/theme.module.scss';
-import { useRouteMatch, useHistory, useParams } from 'react-router-dom';
+import { useHistory, useParams } from 'react-router-dom';
 import gql from 'graphql-tag';
 import { useQuery } from '@apollo/react-hooks';
 import { ReactComponent as Loader } from '../../assets/Loader.svg';
 import { ReactComponent as Placeholder } from '../../assets/no-stock-placeholder.svg';
-import { formatDataToChart, addCurrencySymbol } from '../../utils.service';
+import { addCurrencySymbol } from '../../utils.service';
 import { Chart } from '../Chart/Chart';
 import { DrawerContent } from './DrawerContent';
-import { MatchParams } from '../../routes';
 
 interface StockPageProps {}
 

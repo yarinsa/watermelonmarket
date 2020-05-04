@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Stock } from '../../@generated/types';
 import styled from 'styled-components/macro';
 import { Tab, Tabs } from '@blueprintjs/core';
-import { useHistory, Switch, Route } from 'react-router-dom';
+import { useHistory, Switch, Route, useParams } from 'react-router-dom';
 import { CompanyProfile } from './CompanyProfile';
 import { ReactComponent as NothingYet } from '../../assets/nothing-here-yet.svg';
+import { MatchParams } from '../../routes';
 
 interface DrawerContentProps extends Partial<Stock> {
     name: string;
@@ -15,11 +16,17 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
     companyProfile,
     name,
 }) => {
-    const [selectedTab, setTab] = useState();
+    const [selectedTab, setTab] = useState<string>('');
     let history = useHistory();
+    let { tabId } = useParams<MatchParams>();
 
+    useEffect(() => {
+        if (tabId) {
+            setTab(tabId);
+        }
+    });
     const handleTabSelection = (tabId: string) => {
-        history.push(`/symbol/${symbol}/${tabId}`);
+        history.push(`/stocks/${symbol}/${tabId}`);
     };
     return (
         <Root>
