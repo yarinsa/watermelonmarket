@@ -94,10 +94,11 @@ export const Chart: React.FC<ChartProps> = ({ chartData, symbol }) => {
                 {loading && <Loader />}
                 {data && !loading && (
                     <Line
-                        height={110}
                         data={formatDataToChart(data.stock.chartData)}
+                        height={100}
                         options={{
                             responsive: true,
+                            maintainAspectRatio: false,
                             tooltips: {
                                 mode: 'index',
                                 intersect: false,
@@ -266,8 +267,7 @@ const Root = styled.div`
 `;
 
 const ChartContainer = styled.div`
-    flex: 1;
-    min-height: 200px;
+    height: 220px;
     width: 100%;
     position: relative;
 `;
