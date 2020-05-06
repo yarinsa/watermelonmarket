@@ -69,8 +69,13 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
                         </SecondaryRow>
                         <SecondaryRow>
                             <SecondaryText>
-                                {data.stock.market.exchangeName}{' '}
-                                {data.stock.market.marketState}
+                                <a
+                                    onClick={() =>
+                                        handleDrawer(false, 'market')
+                                    }
+                                >
+                                    {data.stock.market.exchangeName}
+                                </a>
                             </SecondaryText>
                             <SecondaryText>{data.stock.name}</SecondaryText>
                         </SecondaryRow>
