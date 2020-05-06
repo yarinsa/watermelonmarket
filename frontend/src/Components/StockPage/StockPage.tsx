@@ -11,11 +11,12 @@ import { ReactComponent as Placeholder } from '../../assets/no-stock-placeholder
 import { addCurrencySymbol } from '../../utils.service';
 import { Chart } from '../Chart/Chart';
 import { DrawerContent } from './DrawerContent';
+import { MatchParams } from '../../routes';
 
 interface StockPageProps {}
 
 export const StockPage: React.FC<StockPageProps> = ({}) => {
-    const { symbol } = useParams();
+    const { symbol } = useParams<MatchParams>();
 
     const [isDrawerOpen, setDrawer] = useState(false);
     const { data, loading, error } = useQuery(GET_STOCK_INFO, {
@@ -25,6 +26,7 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
     });
 
     let history = useHistory();
+
     const handleDrawer = (isOpen: boolean, route?: string) => {
         if (isOpen) {
             setDrawer(false);
@@ -251,6 +253,10 @@ const GET_STOCK_INFO = gql`
                 marketState
                 exchangeName
                 currency
+                language
+                gmtOffset
+                timezone
+                region
             }
             chartData(timeRange: YEAR, interval: DAY) {
                 time

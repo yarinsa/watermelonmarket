@@ -6,14 +6,17 @@ import { useHistory, Switch, Route, useParams } from 'react-router-dom';
 import { CompanyProfile } from './CompanyProfile';
 import { ReactComponent as NothingYet } from '../../assets/nothing-here-yet.svg';
 import { MatchParams } from '../../routes';
+import { MarketProfile } from './MarketProfile';
 
-interface DrawerContentProps extends Partial<Stock> {
+interface DrawerContentProps
+    extends Pick<Stock, 'symbol' | 'companyProfile' | 'market'> {
     name: string;
 }
 
 export const DrawerContent: React.FC<DrawerContentProps> = ({
     symbol,
     companyProfile,
+    market,
     name,
 }) => {
     const [selectedTab, setTab] = useState<string>('');
@@ -36,11 +39,15 @@ export const DrawerContent: React.FC<DrawerContentProps> = ({
                 className="full-tabs"
             >
                 <Tab id="company-profile" title="Company Profile" />
+                <Tab id="market" title="Market" />
                 <Tab id="my-holdings" title="My Holdings" />
             </Tabs>
             <Switch>
                 <Route exact path={`/stocks/:symbol/company-profile`}>
                     <CompanyProfile {...companyProfile} name={name} />
+                </Route>
+                <Route exact path={`/stocks/:symbol/market`}>
+                    <MarketProfile {...market} />
                 </Route>
                 <Route exact path={`/stocks/:symbol/my-holdings`}>
                     <StyledNothingYet />
@@ -54,6 +61,7 @@ const Root = styled.main`
     display: flex;
     flex-direction: column;
     padding: 20px;
+    overflow-y: scroll;
 `;
 
 const StyledNothingYet = styled(NothingYet)`

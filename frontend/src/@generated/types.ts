@@ -222,7 +222,7 @@ export type StockInfoForPageQuery = (
       & Pick<PriceHistory, 'fiftyTwoWeekLow' | 'fiftyTwoWeekHigh'>
     ), market: (
       { __typename?: 'Market' }
-      & Pick<Market, 'marketState' | 'exchangeName' | 'currency'>
+      & Pick<Market, 'marketState' | 'exchangeName' | 'currency' | 'language' | 'gmtOffset' | 'timezone' | 'region'>
     ), chartData: Array<(
       { __typename?: 'PricePoint' }
       & Pick<PricePoint, 'time' | 'close' | 'open' | 'high' | 'low' | 'volume'>
@@ -395,6 +395,10 @@ export const StockInfoForPageDocument = gql`
       marketState
       exchangeName
       currency
+      language
+      gmtOffset
+      timezone
+      region
     }
     chartData(timeRange: YEAR, interval: DAY) {
       time
