@@ -1,5 +1,5 @@
 import React from 'react';
-import { Market } from '../../@generated/types';
+import { Market, MarketState } from '../../@generated/types';
 import styled from 'styled-components/macro';
 import { Card, H1, H4 } from '@blueprintjs/core';
 import ISO6391 from 'iso-639-1';
@@ -43,25 +43,40 @@ export const MarketProfile: React.FC<Exclude<Market, '_typename'>> = ({
             </div>
             <MarketStateContainer>
                 <Title>Market State</Title>
-                <TimeCardList>
-                    <TimeCard
-                        isActive={
-                            marketState === 'PRE' || marketState === 'PREPRE'
-                        }
-                    >
-                        <TimeCardTitle> PRE </TimeCardTitle>
-                    </TimeCard>
-                    <TimeCard isActive={marketState === 'REGULAR'}>
-                        <TimeCardTitle> REGULAR </TimeCardTitle>
-                    </TimeCard>
-                    <TimeCard
-                        isActive={
-                            marketState === 'POST' || marketState === 'POSTPOST'
-                        }
-                    >
-                        <TimeCardTitle> POST </TimeCardTitle>
-                    </TimeCard>
-                </TimeCardList>
+                {marketState !== MarketState.Closed && (
+                    <TimeCardList>
+                        (
+                        <TimeCard
+                            isActive={
+                                marketState === MarketState.Pre ||
+                                marketState === MarketState.Prepre
+                            }
+                        >
+                            <TimeCardTitle> PRE </TimeCardTitle>
+                        </TimeCard>
+                        <TimeCard
+                            isActive={marketState === MarketState.Regular}
+                        >
+                            <TimeCardTitle> REGULAR </TimeCardTitle>
+                        </TimeCard>
+                        <TimeCard
+                            isActive={
+                                marketState === MarketState.Post ||
+                                marketState === MarketState.Postpost
+                            }
+                        >
+                            <TimeCardTitle> POST </TimeCardTitle>
+                        </TimeCard>
+                        )
+                    </TimeCardList>
+                )}
+                {marketState === MarketState.Closed && (
+                    <TimeCardList>
+                        <TimeCard isActive={null}>
+                            <TimeCardTitle> Closed </TimeCardTitle>
+                        </TimeCard>
+                    </TimeCardList>
+                )}
             </MarketStateContainer>
             <SkylineImage src={currency} />
         </Root>
@@ -82,12 +97,23 @@ const TimeCardList = styled.div`
     justify-content: center;
 `;
 
-const TimeCard = styled(Card)<{ isActive: boolean }>`
+// True Or false values for is Active inidicates the current market status when open (PRE/POST/REG)
+// Null value represents closed marker and turns to red outline.
+const TimeCard = styled(Card)<{ isActive: boolean | null }>`
     display: flex;
     flex-direction: column;
     justify-content: center;
     margin: 10px;
-    border: 1px solid ${props => (props.isActive ? '#62D96B' : 'unset')};
+    border: 1px solid
+        ${props => {
+            if (props.isActive) {
+                return '#62D96B';
+            } else if (props.isActive === null) {
+                return '#ff1b1b';
+            } else {
+                return 'unset';
+            }
+        }};
 `;
 
 const TimeCardTitle = styled(H4)`
