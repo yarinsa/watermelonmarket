@@ -1,6 +1,6 @@
 type Query {
-  stock(symbol: ID!): Stock!
-  searchStock(query: String!): [Stock!]!
+    stock(symbol: ID!): Stock!
+    searchStock(query: String!): [Stock!]!
 }
 
 # Date represents a Date variable #
@@ -9,108 +9,121 @@ type Query {
 scalar MyDate
 
 enum InstrumentType {
-  EQUITY
-  ETF
-  FOREX
+    EQUITY
+    ETF
+    FOREX
 }
 
 type Stock {
-  symbol: ID!
-  name: String!
-  type: InstrumentType!
-  quote: Quote!
-  priceHistory: PriceHistory!
-  companyProfile: CompanyProfile!
-  market: Market!
-  chartData(timeRange: TimeRange!, interval: Interval!): [PricePoint!]!
+    symbol: ID!
+    name: String!
+    type: InstrumentType!
+    quote: Quote!
+    priceHistory: PriceHistory!
+    companyProfile: CompanyProfile!
+    market: Market!
+    chartData(timeRange: TimeRange!, interval: Interval!): [PricePoint!]!
 }
 
 type Quote {
-  price: Float!
-  open: Float!
-  close: Float!
-  low: Float!
-  high: Float!
-  change: Float!
-  changePercent: Float!
-  volume: Int!
-  averageVolume: Int!
-  marketCap: Int!
-  # peRatio is nullable, since it's irrelevant in case of ETF or etc. #
-  peRatio: Float
-  dividend: Float!
-  dividendPercent: Float!
+    price: Float!
+    open: Float!
+    close: Float!
+    low: Float!
+    high: Float!
+    change: Float!
+    changePercent: Float!
+    volume: Int!
+    averageVolume: Int!
+    marketCap: Int!
+    # peRatio is nullable, since it's irrelevant in case of ETF or etc. #
+    peRatio: Float
+    dividend: Float!
+    dividendPercent: Float!
 }
 
 type PriceHistory {
-  fiftyTwoWeekLow: Float!
-  fiftyTwoWeekHigh: Float!
-  fiftyTwoWeekChange: Float!
-  fiftyTwoWeekChangePercent: Float!
+    fiftyTwoWeekLow: Float!
+    fiftyTwoWeekHigh: Float!
+    fiftyTwoWeekChange: Float!
+    fiftyTwoWeekChangePercent: Float!
 }
 
 type CompanyProfile {
-  address: String!
-  phoneNumber: String!
-  website: String!
-  sector: String!
-  industry: String!
-  sector: String!
-  fullTimeEmployees: Int!
-  description: String!
+    address: String!
+    phoneNumber: String!
+    website: String!
+    sector: String!
+    industry: String!
+    sector: String!
+    fullTimeEmployees: Int!
+    description: String!
 }
 
 type Market {
-  exchangeName: ID!
-  region: String!
-  language: String!
-  timezone: String!
-  currency: String!
-  marketState: MarketState!
-  gmtOffset: Int!
+    exchangeName: ID!
+    region: String!
+    language: String!
+    timezone: String!
+    currency: String!
+    marketState: MarketState!
+    gmtOffset: Int!
 }
 
 enum MarketState {
-  PRE
-  REGULAR
-  POST
-  POSTPOST
-  PREPRE
-  CLOSED
+    PRE
+    REGULAR
+    POST
+    POSTPOST
+    PREPRE
+    CLOSED
 }
 
 enum TimeRange {
-  DAY
-  FIVE_DAYS
-  MONTH
-  THREE_MONTH
-  SIX_MONTH
-  YEAR
-  FIVE_YEARS
-  YTD
-  MAX
+    DAY
+    FIVE_DAYS
+    MONTH
+    THREE_MONTH
+    SIX_MONTH
+    YEAR
+    FIVE_YEARS
+    YTD
+    MAX
 }
 
 enum Interval {
-  FIVE_MINUTES
-  FIFTEEN_MINUTES
-  THIRTY_MINUTES
-  HOUR
-  DAY
-  WEEK
-  MONTH
-  THREE_MONTH
+    FIVE_MINUTES
+    FIFTEEN_MINUTES
+    THIRTY_MINUTES
+    HOUR
+    DAY
+    WEEK
+    MONTH
+    THREE_MONTH
 }
 
 type PricePoint {
-  time: MyDate!
-  open: Float!
-  high: Float!
-  low: Float!
-  close: Float!
-  volume: Float!
+    time: MyDate!
+    open: Float!
+    high: Float!
+    low: Float!
+    close: Float!
+    volume: Float!
 }
 
-# schema {
-#   query: Query
-# }
+type Watchlist {
+    id: ID!
+    name: String!
+    stocks: [Stock!]!
+}
+
+extend type Stock {
+    lots: [Lot!]!
+}
+
+type Lot {
+    tradeDate: MyDate!
+    shares: Float!
+    costPerShare: Float!
+    note: String!
+}

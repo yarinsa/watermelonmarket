@@ -12,6 +12,7 @@ import { addCurrencySymbol } from '../../utils.service';
 import { Chart } from '../Chart/Chart';
 import { DrawerContent } from './DrawerContent';
 import { MatchParams } from '../../routes';
+import { AddWatchListButton } from '../AddWatchlistButton';
 
 interface StockPageProps {}
 
@@ -50,10 +51,13 @@ export const StockPage: React.FC<StockPageProps> = ({}) => {
                 <div>
                     <Header>
                         <TitleRow>
-                            {addCurrencySymbol(
-                                data.stock.quote.price.toFixed(2),
-                                data.stock.market.currency
-                            )}
+                            <Title>
+                                {addCurrencySymbol(
+                                    data.stock.quote.price.toFixed(2),
+                                    data.stock.market.currency
+                                )}
+                            </Title>
+                            <AddWatchListButton />
                         </TitleRow>
                         <SecondaryRow>
                             <SecondaryText
@@ -143,7 +147,12 @@ const Header = styled.header`
     padding-bottom: 30px;
 `;
 
-const TitleRow = styled(H1)``;
+const TitleRow = styled.div`
+    display: flex;
+    justify-content: space-between;
+`;
+
+const Title = styled(H1)``;
 
 const SecondaryRow = styled.div`
     display: flex;

@@ -37,14 +37,15 @@ export enum InstrumentType {
 
 export type Stock = {
    __typename?: 'Stock';
-  symbol: Scalars['ID'];
-  name: Scalars['String'];
-  type: InstrumentType;
-  quote: Quote;
-  priceHistory: PriceHistory;
-  companyProfile: CompanyProfile;
-  market: Market;
   chartData: Array<PricePoint>;
+  companyProfile: CompanyProfile;
+  lots: Array<Lot>;
+  market: Market;
+  name: Scalars['String'];
+  priceHistory: PriceHistory;
+  quote: Quote;
+  symbol: Scalars['ID'];
+  type: InstrumentType;
 };
 
 
@@ -140,6 +141,21 @@ export type PricePoint = {
   low: Scalars['Float'];
   close: Scalars['Float'];
   volume: Scalars['Float'];
+};
+
+export type Watchlist = {
+   __typename?: 'Watchlist';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  stocks: Array<Stock>;
+};
+
+export type Lot = {
+   __typename?: 'Lot';
+  tradeDate: Scalars['MyDate'];
+  shares: Scalars['Float'];
+  costPerShare: Scalars['Float'];
+  note: Scalars['String'];
 };
 
 export type GetChartQueryVariables = {

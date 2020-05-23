@@ -1,48 +1,48 @@
 .bp3-button {
-  font-size: 12px;
+    font-size: 12px;
 
-  // Make font-weight like Evergreen-ui
-  font-weight: 500;
+    // Make font-weight like Evergreen-ui
+    font-weight: 500;
 
-  // handle icon button (make icons slightly bigger)
-  .bp3-icon:only-child > svg {
-    width: 16px;
-    height: 16px;
-  }
+    // handle icon button (make icons slightly bigger)
+    .bp3-icon:only-child > svg {
+        width: 16px;
+        height: 16px;
+    }
 
-  // for icon + text, cancel default margin-right
-  > * {
-    margin-right: 8px;
-  }
-  // add our own
-  // > * + .bp3-button-text {
-  //   margin-left: 8px;
-  // }
+    // for icon + text, cancel default margin-right
+    > * {
+        margin-right: 8px;
+    }
+    // add our own
+    // > * + .bp3-button-text {
+    //   margin-left: 8px;
+    // }
 }
 
 .bp3-button.bp3-large {
-  font-size: 14px;
+    font-size: 14px;
 
-  // handle icon button (make icons slightly bigger)
-  .bp3-icon:only-child > svg {
-    width: 18px;
-    height: 18px;
-  }
+    // handle icon button (make icons slightly bigger)
+    .bp3-icon:only-child > svg {
+        width: 18px;
+        height: 18px;
+    }
 }
 
 .bp3-button.bp3-small {
-  font-size: 12px;
+    font-size: 12px;
 
-  // handle icon button (make icons slightly smaller)
-  .bp3-icon:only-child > svg {
-    width: 12px;
-    height: 12px;
-  }
+    // handle icon button (make icons slightly smaller)
+    .bp3-icon:only-child > svg {
+        width: 12px;
+        height: 12px;
+    }
 }
 
 // Make button loading spinner thinner
 .bp3-button-spinner svg {
-  stroke-width: 10px;
+    stroke-width: 10px;
 }
 
 // make icon button active color blue
@@ -54,48 +54,65 @@
 // Button focus
 
 button:focus {
-  z-index: 2;
+    z-index: 2;
 }
 
 .bp3-button:focus,
 .bp3-button:focus:hover {
-  box-shadow: 0 0 0 3px $eg-control-focus-color,
-    inset 0 0 0 1px rgba(67, 90, 111, 0.3),
-    inset 0 -1px 1px 0 rgba(67, 90, 111, 0.14);
+    box-shadow: 0 0 0 3px $eg-control-focus-color,
+        inset 0 0 0 1px rgba(67, 90, 111, 0.3),
+        inset 0 -1px 1px 0 rgba(67, 90, 111, 0.14);
 }
 
 .bp3-button.bp3-minimal:focus {
-  box-shadow: 0 0 0 3px rgba(16, 112, 202, 0.14);
+    box-shadow: 0 0 0 3px rgba(16, 112, 202, 0.14);
 }
 
 .bp3-button.bp3-intent-primary:focus {
-  box-shadow: 0 0 0 3px $eg-control-focus-color,
-    inset 0 0 0 1px rgba(67, 90, 111, 0.14),
-    inset 0 -1px 1px 0 rgba(67, 90, 111, 0.3);
+    box-shadow: 0 0 0 3px $eg-control-focus-color,
+        inset 0 0 0 1px rgba(67, 90, 111, 0.14),
+        inset 0 -1px 1px 0 rgba(67, 90, 111, 0.3);
 }
 
 .bp3-button.bp3-intent-danger:focus {
-  box-shadow: 0 0 0 3px rgba(236, 76, 71, 0.4),
-    inset 0 0 0 1px rgba(67, 90, 111, 0.14),
-    inset 0 -1px 1px 0 rgba(67, 90, 111, 0.3);
+    box-shadow: 0 0 0 3px rgba(236, 76, 71, 0.4),
+        inset 0 0 0 1px rgba(67, 90, 111, 0.14),
+        inset 0 -1px 1px 0 rgba(67, 90, 111, 0.3);
 }
 
 .bp3-button.bp3-intent-success:focus {
-  box-shadow: rgba(35, 194, 119, 0.4) 0px 0px 0px 3px,
-    rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
-    rgba(67, 90, 111, 0.3) 0px -1px 1px 0px inset;
+    box-shadow: rgba(35, 194, 119, 0.4) 0px 0px 0px 3px,
+        rgba(67, 90, 111, 0.14) 0px 0px 0px 1px inset,
+        rgba(67, 90, 111, 0.3) 0px -1px 1px 0px inset;
 }
 
 .bp3-button:focus {
-  // remove ugly outline
-  outline: 0;
+    // remove ugly outline
+    outline: 0;
 }
 
 .bp3-button.bp3-minimal:active,
 .bp3-button.bp3-minimal.bp3-active {
-  background: #3dcc9126;
+    background: #3dcc9126;
 }
 
 .bp3-button.bp3-minimal:focus {
-  box-shadow: none;
+    box-shadow: none;
+}
+
+.bp3-button.bp3-outlined.bp3-intent-primary {
+    border-color: $light-green1;
+    &:hover {
+        border-color: $light-green2;
+    }
+}
+
+.bp3-button.bp3-outlined.bp3-intent-primary {
+    color: $light-green1;
+    &:hover {
+        color: $light-green2;
+    }
+    &.bp3-active {
+        color: $light-green2;
+    }
 }

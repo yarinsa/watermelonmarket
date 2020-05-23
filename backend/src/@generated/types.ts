@@ -39,14 +39,15 @@ export { InstrumentType };
 
 export type Stock = {
    __typename?: 'Stock';
-  symbol: Scalars['ID'];
-  name: Scalars['String'];
-  type: InstrumentType;
-  quote: Quote;
-  priceHistory: PriceHistory;
-  companyProfile: CompanyProfile;
-  market: Market;
   chartData: Array<PricePoint>;
+  companyProfile: CompanyProfile;
+  lots: Array<Lot>;
+  market: Market;
+  name: Scalars['String'];
+  priceHistory: PriceHistory;
+  quote: Quote;
+  symbol: Scalars['ID'];
+  type: InstrumentType;
 };
 
 
@@ -116,6 +117,21 @@ export type PricePoint = {
   low: Scalars['Float'];
   close: Scalars['Float'];
   volume: Scalars['Float'];
+};
+
+export type Watchlist = {
+   __typename?: 'Watchlist';
+  id: Scalars['ID'];
+  name: Scalars['String'];
+  stocks: Array<Stock>;
+};
+
+export type Lot = {
+   __typename?: 'Lot';
+  tradeDate: Scalars['MyDate'];
+  shares: Scalars['Float'];
+  costPerShare: Scalars['Float'];
+  note: Scalars['String'];
 };
 
 export type WithIndex<TObject> = TObject & Record<string, any>;
@@ -209,6 +225,8 @@ export type ResolversTypes = ResolversObject<{
   TimeRange: ResolverTypeWrapper<Partial<TimeRange>>,
   Interval: ResolverTypeWrapper<Partial<Interval>>,
   PricePoint: ResolverTypeWrapper<Partial<PricePoint>>,
+  Watchlist: ResolverTypeWrapper<Partial<Watchlist>>,
+  Lot: ResolverTypeWrapper<Partial<Lot>>,
 }>;
 
 /** Mapping between all available schema types and the resolvers parents */
@@ -230,6 +248,8 @@ export type ResolversParentTypes = ResolversObject<{
   TimeRange: Partial<TimeRange>,
   Interval: Partial<Interval>,
   PricePoint: Partial<PricePoint>,
+  Watchlist: Partial<Watchlist>,
+  Lot: Partial<Lot>,
 }>;
 
 export type QueryResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Query'] = ResolversParentTypes['Query']> = ResolversObject<{
@@ -242,14 +262,15 @@ export interface MyDateScalarConfig extends GraphQLScalarTypeConfig<ResolversTyp
 }
 
 export type StockResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Stock'] = ResolversParentTypes['Stock']> = ResolversObject<{
-  symbol?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
-  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
-  type?: Resolver<ResolversTypes['InstrumentType'], ParentType, ContextType>,
-  quote?: Resolver<ResolversTypes['Quote'], ParentType, ContextType>,
-  priceHistory?: Resolver<ResolversTypes['PriceHistory'], ParentType, ContextType>,
-  companyProfile?: Resolver<ResolversTypes['CompanyProfile'], ParentType, ContextType>,
-  market?: Resolver<ResolversTypes['Market'], ParentType, ContextType>,
   chartData?: Resolver<Array<ResolversTypes['PricePoint']>, ParentType, ContextType, RequireFields<StockChartDataArgs, 'timeRange' | 'interval'>>,
+  companyProfile?: Resolver<ResolversTypes['CompanyProfile'], ParentType, ContextType>,
+  lots?: Resolver<Array<ResolversTypes['Lot']>, ParentType, ContextType>,
+  market?: Resolver<ResolversTypes['Market'], ParentType, ContextType>,
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  priceHistory?: Resolver<ResolversTypes['PriceHistory'], ParentType, ContextType>,
+  quote?: Resolver<ResolversTypes['Quote'], ParentType, ContextType>,
+  symbol?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
+  type?: Resolver<ResolversTypes['InstrumentType'], ParentType, ContextType>,
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 
@@ -310,6 +331,21 @@ export type PricePointResolvers<ContextType = MyContext, ParentType extends Reso
   __isTypeOf?: isTypeOfResolverFn<ParentType>,
 }>;
 
+export type WatchlistResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Watchlist'] = ResolversParentTypes['Watchlist']> = ResolversObject<{
+  id?: Resolver<ResolversTypes['ID'], ParentType, ContextType>,
+  name?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  stocks?: Resolver<Array<ResolversTypes['Stock']>, ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+}>;
+
+export type LotResolvers<ContextType = MyContext, ParentType extends ResolversParentTypes['Lot'] = ResolversParentTypes['Lot']> = ResolversObject<{
+  tradeDate?: Resolver<ResolversTypes['MyDate'], ParentType, ContextType>,
+  shares?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  costPerShare?: Resolver<ResolversTypes['Float'], ParentType, ContextType>,
+  note?: Resolver<ResolversTypes['String'], ParentType, ContextType>,
+  __isTypeOf?: isTypeOfResolverFn<ParentType>,
+}>;
+
 export type Resolvers<ContextType = MyContext> = ResolversObject<{
   Query?: QueryResolvers<ContextType>,
   MyDate?: GraphQLScalarType,
@@ -319,6 +355,8 @@ export type Resolvers<ContextType = MyContext> = ResolversObject<{
   CompanyProfile?: CompanyProfileResolvers<ContextType>,
   Market?: MarketResolvers<ContextType>,
   PricePoint?: PricePointResolvers<ContextType>,
+  Watchlist?: WatchlistResolvers<ContextType>,
+  Lot?: LotResolvers<ContextType>,
 }>;
 
 

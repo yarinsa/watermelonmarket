@@ -12,14 +12,15 @@ enum InstrumentType {
 }
 
 type Stock {
-  symbol: ID!
-  name: String!
-  type: InstrumentType!
-  quote: Quote!
-  priceHistory: PriceHistory!
-  companyProfile: CompanyProfile!
-  market: Market!
   chartData(timeRange: TimeRange!, interval: Interval!): [PricePoint!]!
+  companyProfile: CompanyProfile!
+  lots: [Lot!]!
+  market: Market!
+  name: String!
+  priceHistory: PriceHistory!
+  quote: Quote!
+  symbol: ID!
+  type: InstrumentType!
 }
 
 type Quote {
@@ -104,4 +105,17 @@ type PricePoint {
   low: Float!
   close: Float!
   volume: Float!
+}
+
+type Watchlist {
+  id: ID!
+  name: String!
+  stocks: [Stock!]!
+}
+
+type Lot {
+  tradeDate: MyDate!
+  shares: Float!
+  costPerShare: Float!
+  note: String!
 }
