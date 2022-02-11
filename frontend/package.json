@@ -74,7 +74,7 @@
         "mobx-react": "^6.2.2",
         "moment": "^2.25.1",
         "moment-locales-webpack-plugin": "^1.2.0",
-        "node-sass": "^4.13.1",
+        "node-sass": "^7.0.0",
         "optimize-css-assets-webpack-plugin": "5.0.3",
         "pnp-webpack-plugin": "1.6.4",
         "postcss-flexbugs-fixes": "4.1.0",
